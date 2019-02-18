@@ -3,7 +3,7 @@ import { Component, Input } from "@angular/core";
 import { NavController } from "ionic-angular";
 import { Test } from "../../models/parcel";
 import { ExportPage } from "../../pages/export/export";
-import { BrowserTab } from "@ionic-native/browser-tab";
+import { InAppBrowser } from '@ionic-native/in-app-browser';
 
 // Providers
 import { DataService } from './../../providers/data-service';
@@ -34,7 +34,7 @@ export class ResumeComponent {
   constructor(
     private dataService: DataService,
     public navCtrl: NavController,
-    private browserTab: BrowserTab
+    private iab : InAppBrowser
   ) {}
 
   ngOnInit() {
@@ -58,16 +58,13 @@ export class ResumeComponent {
   openMap(event) {
     event.stopPropagation();
 
-    this.browserTab.isAvailable().then((isAvailable: boolean) => {
-      if (isAvailable) {
-        this.browserTab.openUrl(
-          "http://maps.google.com/maps?q=" +
+    let url = "http://maps.google.com/maps?q=" +
             this.resume.geolocation.latitude +
             "," +
-            this.resume.geolocation.longitude
-        );
-      }
-    });
+            this.resume.geolocation.longitude;
+
+    this.iab.create(url, "_system");
+
   }
 
   exportTest(event) {

@@ -20,7 +20,7 @@ import { ScreenOrientation } from '@ionic-native/screen-orientation';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { Toast } from '@ionic-native/toast';
-import { BrowserTab } from '@ionic-native/browser-tab';
+import { InAppBrowser } from '@ionic-native/in-app-browser';
 
 // Pages
 import { CameraPage } from '../pages/camera/camera';
@@ -129,7 +129,7 @@ export function createTranslateLoader(http: Http) {
     GalleryModal
   ],
   providers: [
-    BrowserTab,
+    InAppBrowser,
     Camera,
     DataService,
     EmailComposer,
