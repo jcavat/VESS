@@ -28,8 +28,8 @@ export class VerifNotationPage {
   heightRuler: number;
   score: number;
   private helpId: string;
-  items: Array<{ title: string, checked: Boolean, imgSrc?: string, code: number }>;
-  criterias: Array<{ title: string, array: Array<{ title: string, checked: Boolean, imgSrc?: string, code: number }> }>;
+  items: Array<{ title: string, checked: boolean, imgSrc?: string, code: number }>;
+  criterias: Array<{ title: string, array: Array<{ title: string, checked: boolean, imgSrc?: string, code: number }> }>;
   private currentLayer: Layer;
   private currentTest: Test;
   private nextLayerIndex: number;
@@ -222,31 +222,61 @@ export class VerifNotationPage {
       }
     }
 
-    //Condition of criteria
-    if (((cntChecked >= 2) && (cntCriteria == 3)) || ((cntChecked >= 3) && (cntCriteria == 4))) {//Notation ok
-      this.showAlert(this.translate.get('VALIDATION'),
+    // Handle specific case of SQ3 score
+    if(this.score == 3) {
+      let hasPositiveCrit = this.criterias[0].array.some(criteria => criteria.checked);
+      let hasNegativeCrit = this.criterias[1].array.some(criteria => criteria.checked);
+
+      // SQ3 should have at least 1 positive criteria AND at least 1 negative criteria checked
+      if(hasPositiveCrit && hasNegativeCrit) {
+        this.showAlert(this.translate.get('VALIDATION'),
         this.translate.get('VALIDATION_ENOUGH_VALID_CRITERIA', { score: this.score }),
         ['OK']);
-      this.goToNextLayerOrHome();
-    } else if (cntChecked == 0) {//Return to decision tree on wrong result
-      this.showAlert(this.translate.get('NO_VALIDATED_CRITERIA'),
-        this.translate.get('VALIDATION_NO_VALID_CRITERIA'),
-        ['OK']);
-      this.navCtrl.push(Notation1Page);
-    } else {//suggest to return to decision tree or valid notation
-      this.showAlert(this.translate.get('VALIDATION'), this.translate.get('VALIDATION_FEW_VALID_CRITERIA', { score: this.score }), [
-        {
-          text: this.translate.get('NO_REDO_NOTATION'),
-          handler: data => {
-            this.navCtrl.push(Notation1Page);
-          }
-        },
-        {
-          text: this.translate.get('YES'),
-          handler: data => {
-            this.goToNextLayerOrHome();
-          }
-        }]);
+        this.goToNextLayerOrHome();
+      }
+      else{
+        let alertTitle = "";
+        let alertText = "";
+        if (hasPositiveCrit && !hasNegativeCrit){
+          alertTitle = this.translate.get('VALIDATION_INCORRECT_CRITERIAS');
+          alertText = this.translate.get('VALIDATION_NO_NEGATIVE_CRITERIA')
+        } else {
+          alertTitle = this.translate.get('VALIDATION_INCORRECT_CRITERIAS');
+          alertText = this.translate.get('VALIDATION_NOT_ENOUGH_CRITERIA');
+        }
+
+        this.showAlert(alertTitle, alertText, ['OK']);
+        this.navCtrl.push(Notation1Page);
+      }
+    }
+    else { // if score is not 3
+
+      //Condition of criteria
+      if (((cntChecked >= 2) && (cntCriteria == 3)) || ((cntChecked >= 3) && (cntCriteria == 4))) {//Notation ok
+        this.showAlert(this.translate.get('VALIDATION'),
+          this.translate.get('VALIDATION_ENOUGH_VALID_CRITERIA', { score: this.score }),
+          ['OK']);
+        this.goToNextLayerOrHome();
+      } else if (cntChecked == 0) {//Return to decision tree on wrong result
+        this.showAlert(this.translate.get('NO_VALIDATED_CRITERIA'),
+          this.translate.get('VALIDATION_NO_VALID_CRITERIA'),
+          ['OK']);
+        this.navCtrl.push(Notation1Page);
+      } else {//suggest to return to decision tree or valid notation
+        this.showAlert(this.translate.get('VALIDATION'), this.translate.get('VALIDATION_FEW_VALID_CRITERIA', { score: this.score }), [
+          {
+            text: this.translate.get('NO_REDO_NOTATION'),
+            handler: data => {
+              this.navCtrl.push(Notation1Page);
+            }
+          },
+          {
+            text: this.translate.get('YES'),
+            handler: data => {
+              this.goToNextLayerOrHome();
+            }
+          }]);
+      }
     }
   }
 
