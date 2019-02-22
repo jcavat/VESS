@@ -14,6 +14,7 @@ import { TutorialPage } from './../tutorial/tutorial';
 import { DataService } from '../../providers/data-service';
 import { Toasts } from './../../providers/toasts';
 import { TranslateProvider } from './../../providers/translate/translate';
+import { GpsServiceProvider } from './../../providers/gps-service/gps-service'
 
 
 @Component({
@@ -28,6 +29,7 @@ export class HomePage {
     public modalCtrl: ModalController,
     public navCtrl: NavController,
     public navParams: NavParams,
+    private gpsService : GpsServiceProvider,
     private toasts: Toasts,
     private translate: TranslateProvider) {
   }
@@ -41,6 +43,8 @@ export class HomePage {
         this.translate.setLang('fr'); // Default language (before the user sets the one s/he prefers).
       }
     });
+
+    this.gpsService.askGPSPermission();
   }
 
   ionViewDidEnter() {

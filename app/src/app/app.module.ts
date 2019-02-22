@@ -12,6 +12,7 @@ import { MyApp } from './app.component';
 
 // Ionic Native plugins
 import { Camera } from '@ionic-native/camera';
+import { Diagnostic } from '@ionic-native/diagnostic';
 import { EmailComposer } from '@ionic-native/email-composer';
 import { File } from '@ionic-native/file';
 import { FilePath } from '@ionic-native/file-path';
@@ -45,6 +46,7 @@ import { Toasts } from '../providers/toasts';
 import { Utils } from '../providers/utils';
 import { GalleryModal } from 'ionic-gallery-modal';
 import { ZoomableImage } from 'ionic-gallery-modal';
+import { GpsServiceProvider } from '../providers/gps-service/gps-service';
 
 
 // Component
@@ -132,10 +134,12 @@ export function createTranslateLoader(http: Http) {
     InAppBrowser,
     Camera,
     DataService,
+    Diagnostic,
     EmailComposer,
     File,
     FilePath,
     Geolocation,
+    GpsServiceProvider,
     RulerService,
     ScreenOrientation,
     SplashScreen,
