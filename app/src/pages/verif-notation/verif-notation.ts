@@ -261,9 +261,10 @@ export class VerifNotationPage {
       this.currentTest.step = Steps.PICTURE_LAYER;
         this.navCtrl.push(CameraPage);
       }
-      else
+      else {
         this.currentTest.step = Steps.NOTATION;
         this.navCtrl.push(Notation1Page);
+      }
     } else {
       this.calculateAndShowTestScore();
     }
