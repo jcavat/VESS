@@ -7,8 +7,8 @@ import { Camera } from '@ionic-native/camera';
 import { File } from '@ionic-native/file';
 
 // Pages
-import { GifViewPage } from '../gif-view/gif-view';
 import { Notation1Page } from '../notation-1/notation-1';
+import { DefiningLayerPage } from "../defining-layer/defining-layer";
 // Providers
 import { DataService } from './../../providers/data-service';
 import { Toasts } from './../../providers/toasts';
@@ -152,8 +152,8 @@ export class CameraPage {
       this.dataService.saveParcels();
       switch (this.testStep) {
         case Steps.PICTURE_EXTRACTED_BLOCK:
-          this.currentTest.step = Steps.OPENING_BLOCK;
-          this.navCtrl.push(GifViewPage);
+          this.currentTest.step = Steps.DEFINING_LAYERS;
+          this.navCtrl.push(DefiningLayerPage);
           break;
         case Steps.PICTURE_LAYER:
           this.navCtrl.push(Notation1Page)
