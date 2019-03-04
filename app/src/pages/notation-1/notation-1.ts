@@ -44,13 +44,13 @@ export class Notation1Page {
       {
         title: this.translate.get('NOTATION_STEP1_OPTION2'),
         checked: false,
-        imgSrc: './assets/pictures/sq2.jpg',
+        imgSrc: './assets/pictures/B8.JPG',
         code: 2
       },
       {
         title: this.translate.get('NOTATION_STEP1_OPTION3'),
         checked: false,
-        imgSrc: './assets/pictures/sq3.jpg',
+        imgSrc: './assets/pictures/B12.JPG',
         code: 3
       }
     ];
