@@ -43,15 +43,13 @@
           </ion-card-content>
 
           <ion-card-header>
-            {{ 'APPEARANCE_AFTER_BREAK_UP' | translate }} : {{ 'SAME_SOIL_DIFFERENT_TILLAGE' | translate }}
+            {{ 'APPEARANCE_AFTER_BREAK_UP' | translate }}
           </ion-card-header>
           <ion-card-content>
             <div>
               <img src={{item.appearance1}} (click)="showModalPicture(item.appearance1)" />
-              <img src={{item.appearance2}} (click)="showModalPicture(item.appearance2)" />
             </div>
           </ion-card-content>
-
 
           <ion-card-header>
             {{ 'DISTINGUISHING_FEATURE' | translate }}
@@ -64,7 +62,7 @@
           </ion-card-content>
 
           <ion-card-header>
-            {{ 'APPEARANCE_OF_FRAGMENT' | translate }}
+            {{ 'APPEARANCE_OF_WHOLE_FRAGMENT' | translate }}
           </ion-card-header>
           <ion-card-content>
             <div>
@@ -73,6 +71,16 @@
             {{item.aggreagatesTxt}}
           </ion-card-content>
 
+          <div *ngIf="item.aggreagatesShatteredImg !== undefined">
+            <ion-card-header>
+              {{ 'APPEARANCE_OF_SHATTERED_FRAGMENT' | translate }}
+            </ion-card-header>
+            <ion-card-content>
+              <div>
+                <img src={{item.aggreagatesShatteredImg}} (click)="showModalPicture(item.aggreagatesShatteredImg)" />
+              </div>
+            </ion-card-content>
+          </div>
 
         </ion-scroll>
       </ion-card>

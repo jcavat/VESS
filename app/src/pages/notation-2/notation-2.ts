@@ -66,13 +66,13 @@ export class Notation2Page {
           {
             title: this.translate.get('NOTATION_STEP2_IF_STEP1_1_OPTION1'),
             checked: false,
-            imgSrc: './assets/pictures/sq1.jpg',
+            imgSrc: './assets/pictures/D2_Sq1_agregat.JPG',
             code2: 1
           },
           {
             title: this.translate.get('NOTATION_STEP2_IF_STEP1_1_OPTION2'),
             checked: false,
-            imgSrc: './assets/pictures/sq2.jpg',
+            imgSrc: './assets/pictures/D5_Sq2_bloc_apres_extraction2.JPG',
             code2: 2
           }
         ];
@@ -85,13 +85,13 @@ export class Notation2Page {
           {
             title: this.translate.get('NOTATION_STEP2_IF_STEP1_3_OPTION1'),
             checked: false,
-            imgSrc: './assets/pictures/sq3.jpg',
+            imgSrc: './assets/pictures/D12.JPG',
             code2: 1
           },
           {
             title: this.translate.get('NOTATION_STEP2_IF_STEP1_3_OPTION2'),
             checked: false,
-            imgSrc: './assets/pictures/sq2.jpg',
+            imgSrc: './assets/pictures/D15_Sq5_bloc_apres_extraction.JPG',
             code2: 2
           }
         ];

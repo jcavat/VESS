@@ -84,7 +84,7 @@ export class VerifNotationPage {
             {
               title: this.translate.get('VERIF_SCORE1_CRITERIA1_CHECK3'),
               checked: false,
-              imgSrc: './assets/pictures/sq2_1cm.jpg',
+              imgSrc: './assets/pictures/F4_trait_distinctif_Sq1_agregats_ronds_fins_et_poreux.JPG',
               code: 3
             }
           ];
@@ -97,7 +97,7 @@ export class VerifNotationPage {
             {
               title: this.translate.get('VERIF_SCORE2_CRITERIA1_CHECK1'),
               checked: false,
-              imgSrc: './assets/pictures/no_picture.png',
+              imgSrc: './assets/pictures/D8_Sq2__forte_porosite_intra_agregat.JPG',
               code: 1
             },
             {
@@ -109,7 +109,7 @@ export class VerifNotationPage {
             {
               title: this.translate.get('VERIF_SCORE2_CRITERIA1_CHECK3'),
               checked: false,
-              imgSrc: './assets/pictures/no_picture.png',
+              imgSrc: './assets/pictures/F7_agegats_arrondis_et_poreux_maintenus_par_des_racines.jpg',
               code: 3
             }
           ];
@@ -122,7 +122,7 @@ export class VerifNotationPage {
             {
               title: this.translate.get('VERIF_SCORE3_CRITERIA1_CHECK1'),
               checked: false,
-              imgSrc: './assets/pictures/no_picture.png',
+              imgSrc: './assets/pictures/D8_Sq2__forte_porosite_intra_agregat.JPG',
               code: 1
             },
             {
@@ -134,14 +134,14 @@ export class VerifNotationPage {
             {
               title: this.translate.get('VERIF_SCORE3_CRITERIA1_CHECK3'),
               checked: false,
-              imgSrc: './assets/pictures/sq2_1cm.jpg',
+              imgSrc: './assets/pictures/D10_trait_distinctif_Sq2__forte_porosite.JPG',
               code: 3
             }
           ];
           this.criterias = [{ title: this.translate.get('VERIF_SCORE3_CRITERIA1_TITLE'), array: this.items }];
           this.criterias.push({
             title: this.translate.get('VERIF_SCORE3_CRITERIA2_TITLE'),
-            array: [{ title: this.translate.get('YES'), checked: false, imgSrc: './assets/pictures/motte_fermee.jpg', code: 1 }]
+            array: [{ title: this.translate.get('YES'), checked: false, imgSrc: './assets/pictures/D11_Sq4_fragment_brise2.JPG', code: 1 }]
           });
           this.helpId = "help_verif_score3";
           break;
@@ -150,18 +150,18 @@ export class VerifNotationPage {
           this.items = [
             {
               title: this.translate.get('VERIF_SCORE4_CRITERIA1_CHECK1'),
-              checked: false, imgSrc: './assets/pictures/fragment_1cm.jpg',
+              checked: false, imgSrc: './assets/pictures/F12.JPG',
               code: 1
             },
             {
               title: this.translate.get('VERIF_SCORE4_CRITERIA1_CHECK2'),
               checked: false,
-              imgSrc: './assets/pictures/racine_vdt_1.jpg',
+              imgSrc: './assets/pictures/D11_Sq4_fragment_brise2.JPG',
               code: 2
             }
           ];
           this.criterias = [{ title: this.translate.get('VERIF_SCORE4_CRITERIA1_TITLE'), array: this.items }];
-          this.criterias.push({ title: this.translate.get('VERIF_SCORE4_CRITERIA2_TITLE'), array: [{ title: 'Oui', checked: false, imgSrc: './assets/pictures/racines_autour_mottes.png', code: 1 }] });
+          this.criterias.push({ title: this.translate.get('VERIF_SCORE4_CRITERIA2_TITLE'), array: [{ title: 'Oui', checked: false, imgSrc: './assets/pictures/F14_Sq5_racines_en_arretes_de_poisson.JPG', code: 1 }] });
           this.helpId = "help_verif_score4";
           break;
         case 5: // Majority of closed clods; almost no aggregates smaller than 7 cm
@@ -175,14 +175,14 @@ export class VerifNotationPage {
             {
               title: this.translate.get('VERIF_SCORE5_CRITERIA1_CHECK2'),
               checked: false,
-              imgSrc: './assets/pictures/no_picture.png',
+              imgSrc: './assets/pictures/F16_Sq5_Fragment_entier_tres_anguleux.JPG',
               code: 2
             }
           ];
           this.criterias = [{ title: this.translate.get('VERIF_SCORE5_CRITERIA1_TITLE'), array: this.items }];
           this.criterias.push({
             title: this.translate.get('VERIF_SCORE5_CRITERIA2_TITLE'),
-            array: [{ title: this.translate.get('YES'), checked: false, imgSrc: './assets/pictures/racine_vdt_1.jpg', code: 1 }]
+            array: [{ title: this.translate.get('YES'), checked: false, imgSrc: './assets/pictures/F14_Sq5_racines_en_arretes_de_poisson.JPG', code: 1 }]
           });
           this.criterias.push({
             title: this.translate.get('VERIF_SCORE5_CRITERIA3_TITLE'),
