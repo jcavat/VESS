@@ -11,6 +11,7 @@ import { RulerService } from '../../providers/ruler-service';
 import { Toasts } from '../../providers/toasts';
 import { TranslateProvider } from '../../providers/translate/translate'
 import { Utils } from './../../providers/utils';
+import { UploadProvider } from '../../providers/upload/upload';
 
 /**
  * Validation of the layer notation. User must check multiples criterias.
@@ -44,7 +45,8 @@ export class VerifNotationPage {
     private platform: Platform,
     public rulerService: RulerService,
     private toasts: Toasts,
-    private translate: TranslateProvider) { }
+    private translate: TranslateProvider,
+    private uploadProvider: UploadProvider) { }
 
   ionViewDidLoad() {
     this.currentLayer = this.dataService.getCurrentLayer();
@@ -330,6 +332,7 @@ export class VerifNotationPage {
       if (value != null) {
         this.currentTest.user = value;
         this.dataService.saveParcels();
+        this.uploadProvider.uploadTest(this.currentTest);
       }
     });
     this.currentTest.isCompleted = true;
@@ -337,6 +340,10 @@ export class VerifNotationPage {
     this.dataService.saveParcels();
     //show resume
     this.modalCtrl.create(ModalPicturePage, { type: "resume", resume: this.currentTest }).present();
+
+    // Upload to server
+    //this.uploadProvider.uploadTest(this.currentTest);
+
     //go to the home view
     this.navCtrl.popToRoot();
   }
