@@ -41,11 +41,11 @@ import { StructuralQualityPage } from './../pages/structural-quality/structural-
 // Providers
 import { DataService } from '../providers/data-service';
 import { RulerService } from '../providers/ruler-service';
+import { UploadProvider } from '../providers/upload/upload';
 import { Toasts } from '../providers/toasts';
 import { Utils } from '../providers/utils';
 import { GalleryModal } from 'ionic-gallery-modal';
 import { ZoomableImage } from 'ionic-gallery-modal';
-
 
 // Component
 import { FooterComponent } from '../components/footer/footer';
@@ -143,7 +143,8 @@ export function createTranslateLoader(http: Http) {
     Toast,
     Toasts,
     Utils,
-    TranslateProvider
+    TranslateProvider,
+    UploadProvider
   ]
 })
 
