@@ -6,7 +6,6 @@ import { DataService } from '../../providers/data-service';
 import { TranslateProvider } from '../../providers/translate/translate'
 import { Utils } from '../../providers/utils';
 import { Test } from '../../models/parcel';
-import { Base64 } from '@ionic-native/base64';
 
 /*
   Generated class for the UploadProvider provider.
@@ -23,8 +22,7 @@ export class UploadProvider {
 
 
   constructor( public http: Http, 
-              private dataService: DataService, 
-              private base64: Base64) {}
+              private dataService: DataService) {}
 
   public uploadTest(test: Test){
     
