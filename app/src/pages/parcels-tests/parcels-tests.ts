@@ -276,15 +276,16 @@ export class ParcelsTestsPage {
           let testId = selectedParcel.tests.length > 0
             ? selectedParcel.tests[selectedParcel.tests.length - 1].id + 1
             : 1;
+          let currentParcel = this.dataService.getCurrentParcel()
           let test = new Test({
             id: testId,
             name: this.translate.get("TEST") + " " + testId,
             date: Utils.getCurrentDatetime("dd/MM/y"),
-            step: Steps.EXTRACTING_BLOCK
+            step: Steps.EXTRACTING_BLOCK,
+            parcel: {num: currentParcel.ofag, name: currentParcel.name },
+            isUploaded: false
           });
-          let parcelIndex = this.parcels.indexOf(
-            this.dataService.getCurrentParcel()
-          );
+          let parcelIndex = this.parcels.indexOf(currentParcel);
           this.parcels[parcelIndex].tests.push(test);
           this.dataService.setCurrentTest(test.id);
           this.dataService.saveParcels();

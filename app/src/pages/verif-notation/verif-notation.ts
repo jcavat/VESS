@@ -331,18 +331,16 @@ export class VerifNotationPage {
     this.dataService.getUserInfo().then((value) => {
       if (value != null) {
         this.currentTest.user = value;
+        this.currentTest.isCompleted = true;
+        this.currentTest.score = testScore;
         this.dataService.saveParcels();
         this.uploadProvider.uploadTest(this.currentTest);
+
+        //show resume
+        this.modalCtrl.create(ModalPicturePage, { type: "resume", resume: this.currentTest }).present();
       }
     });
-    this.currentTest.isCompleted = true;
-    this.currentTest.score = testScore;
-    this.dataService.saveParcels();
-    //show resume
-    this.modalCtrl.create(ModalPicturePage, { type: "resume", resume: this.currentTest }).present();
-
-    // Upload to server
-    //this.uploadProvider.uploadTest(this.currentTest);
+    
 
     //go to the home view
     this.navCtrl.popToRoot();

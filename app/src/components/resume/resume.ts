@@ -74,6 +74,7 @@ export class ResumeComponent {
   }
 
   uploadTest(event) {
-    this.uploadService.uploadTest(this.resume);
+    if(!this.resume.isUploaded)
+      this.uploadService.uploadTest(this.resume);
   }
 }

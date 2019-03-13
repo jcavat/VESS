@@ -6,6 +6,7 @@ import { DataService } from '../../providers/data-service';
 import { TranslateProvider } from '../../providers/translate/translate'
 import { Utils } from '../../providers/utils';
 import { Test } from '../../models/parcel';
+import { LoadingController, Loading } from 'ionic-angular';
 
 /*
   Generated class for the UploadProvider provider.
@@ -22,99 +23,49 @@ export class UploadProvider {
 
 
   constructor( public http: Http, 
-              private dataService: DataService) {}
+              private dataService: DataService,
+              private loadingController: LoadingController) {}
 
   public uploadTest(test: Test){
     
-    let testJSON = Object.assign({}, test);
-    console.log(test);
-    console.log(testJSON);
-
-    this.uploadTestJSON(testJSON);
-    
-    /*
-    testJSON.layers.forEach(l => {
-      delete l.maxThickness;
-      delete l.minThickness;
-      delete l.id;
+    const loading : Loading = this.loadingController.create({
+      content: 'Uploading...',
+      duration: 10000
     });
-    */
 
-    //delete testJSON.user.idOfag;
-    //delete testJSON.user.language;
+    loading.present().then(
+      l => console.log()
+    );
 
-  }
-
-  private encodePath(path): Promise<String> {
-    return new Promise<String>((resolve, error) => {
-    var c = document.createElement('canvas');
-		var ctx = c.getContext("2d");
-		var img = new Image();
-		img.onload = function() {
-			c.width = 1280;
-			c.height = 720;
-
-			ctx.drawImage(img, 0, 0);
-      let split = path.split(".");
-      let fileType = split[split.length -1];
-			var dataUri = c.toDataURL("image/"+fileType);
-			
-			resolve(dataUri);
-		};
-    img.src = path;
-  });
-  }
-
-  private uploadTestJSON(testJSON){
-
-    
+    let testJSON : any = Object.assign({}, test);
 
     if (!testJSON.comment) testJSON.comment = "";
     if (!testJSON.geolocation) testJSON.geolocation = {longitude: -1, latitude: -1};
     if (!testJSON.user.farmerID) testJSON.user.farmerID = "";
 
-    let promiseBlockEncoded = undefined;
+    let promiseBlockEncoded : Promise<String> = undefined;
     if(testJSON.picture) {
       let path = Utils.getPathForImage(this.dataService.getLocalDirectory(), testJSON.picture); // Add block picture if existing
-      //promiseBlockEncoded = this.base64.encodeFile(path);
+
       promiseBlockEncoded = this.encodePath(path);
-      /*.then(
-        (base64File) => {
-          testJSON.encodedImage = base64File;
-          isBlockPictureEncoded = true
-        },
-        (err) => {
-          console.log(err);
-          isBlockPictureEncoded = true
-        });*/
+
     } else {
-      testJSON.encodedImage = "";
-      promiseBlockEncoded = "";
+      promiseBlockEncoded = Promise.resolve("");
     }
 
-    let promiseLayersEncoded = []
+    let promiseLayersEncoded  : Promise<String>[] = []
     for (let layer of testJSON.layers) { // Add existing layers pictures
       if(layer.picture){ 
         let path = Utils.getPathForImage(this.dataService.getLocalDirectory(), layer.picture); // Add block picture if existing
-        //promiseLayersEncoded[layer.num] = this.base64.encodeFile(path);
+        
         promiseLayersEncoded[layer.num] = this.encodePath(path);
-        /*.then(
-          (base64File) => {
-            layer.encodedImage = base64File;
-            layerPictureEncoded[layer.num] = true
-          },
-          (err) => {
-            console.log(err);
-            layerPictureEncoded[layer.num] = true
-          });
-          */
+
       } else {
-        layer.encodedImage = "";
-        promiseLayersEncoded[layer.num] = "";
+        promiseLayersEncoded[layer.num] = Promise.resolve("");
       }
     }
 
-    let allLayerEncoded = Promise.all(promiseLayersEncoded);
+    let allLayerEncoded : Promise<String[]> = Promise.all(promiseLayersEncoded);
 
     let req_headers = new Headers({
       'Content-Type': 'application/json',
@@ -122,73 +73,62 @@ export class UploadProvider {
     });
     
 
+    // Only when all the pictures are encoded we send the data, hence the Promise.all()
     Promise.all([
       promiseBlockEncoded,
-
-        allLayerEncoded
+      allLayerEncoded
     ])
     .then(values => {
 
       let encodedBlock = values[0];
       testJSON.encodedImage = encodedBlock;
-      console.log("encoded Block: ", encodedBlock);
+      console.log("encoded Block: OK");
       
-      let encodedLayer = values[1];
+      let encodedLayers = values[1];
       for (let layer of testJSON.layers ){
-        layer.encodedImage = encodedLayer[layer.num];
-        console.log("encoded layer n° ",layer.num," : ",layer.encodedImage);
+        layer.encodedImage = encodedLayers[layer.num];
+        console.log("encoded layer n° ",layer.num," OK");
       }
 
       this.http.post(this.URL_SERVER_UPLOAD,testJSON, {headers: req_headers})
       .map(res => res.json)
-      .subscribe( res => {
-        console.log(res);
-      });
+      .subscribe( 
+        res => {
+          test.isUploaded = true;
+          this.dataService.saveParcels();
+
+          loading.dismissAll();
+        },
+        err => {
+          loading.dismissAll();
+        }
+      );
    });
 
   }
 
-  public testUpload(){
-    let testJSON = {
-      "step": 5,
-      "isCompleted": true,
-      "layers": [
-        {
-          "num": 1,
-          "thickness": 15,
-          "minThickness": 0,
-          "maxThickness": 15,
-          "comment": "",
-          "score": 3,
-          "encodedImage": ""
-        },
-        {
-          "num": 2,
-          "thickness": 15,
-          "minThickness": 15,
-          "maxThickness": 30,
-          "comment": "",
-          "score": 3,
-          "encodedImage": ""
-        }
-      ],
-      "id": 9,
-      "name": "Test 9",
-      "date": "11/03/2019",
-      "thickness": 30,
-      "soilState": "NORMAL_SOIL",
-      "score": 3,
-      "encodedImage": "",
-      "user": {
-        "firstName": "fab",
-        "lastName": "vit",
-        "userType": "anonymous",
-        "mail": "fab@moi.ch",
-        "farmerID": "165846464"
-      }
-    };
-  
-    this.uploadTestJSON(testJSON);
+  private encodePath(path : string): Promise<String> {
+    return new Promise<String>((resolve, error) => {
+      var c = document.createElement('canvas');
+      var ctx = c.getContext("2d");
+      var img = new Image();
+      img.onload = function() {
+        c.width = 1280;
+        c.height = 720;
+
+        ctx.drawImage(img, 0, 0);
+
+        var dataUri = c.toDataURL("image/jpg");
+        
+        resolve(dataUri);
+      };
+      img.onerror = function(){
+        console.log("Couldn't upload an image")
+        resolve("");
+      };
+
+      img.src = path;
+    });
   }
 
 }
