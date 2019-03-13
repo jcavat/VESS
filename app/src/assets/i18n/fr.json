@@ -95,6 +95,7 @@
   "NUMBER_OF_LAYERS": "Nombre de couches",
   "OFAG_ID": "Identifiant OFAG",
   "PARCEL": "Parcelle",
+  "PARCEL_ID": "Numéro de Parcelle",
   "PARCEL_NAME": "Parcelle : {{name}}",
   "PARCELS": "Parcelles",
   "PARCELS_TO_TEST": "Parcelles à tester",

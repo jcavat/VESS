@@ -123,7 +123,7 @@ export class ParcelsTestsPage {
             },
             {
               name: "ofag",
-              placeholder: this.translate.get("OFAG_ID"),
+              placeholder: this.translate.get("PARCEL_ID"),
               value: this.user.idOfag
             }
           ];
@@ -187,7 +187,7 @@ export class ParcelsTestsPage {
    * event : event that was fired.
    * action : the action to do with the item (add, edit or delete)
    * item : the selected item.
-   * itemType : the kind of item we edit (parcels, tests)
+   * itemType : thonverting circular structure to JSON kind of item we edit (parcels, tests)
    */
   // manageItem(event, action: string, item: any, itemType: number) {
   //   event.stopPropagation();
