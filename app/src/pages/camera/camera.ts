@@ -15,6 +15,7 @@ import { Toasts } from './../../providers/toasts';
 import { TranslateProvider } from '../../providers/translate/translate'
 import { Utils } from './../../providers/utils';
 import { Geolocation } from '@ionic-native/geolocation';
+import { LocationAccuracy } from '@ionic-native/location-accuracy'
 
 declare var cordova;
 
@@ -54,9 +55,22 @@ export class CameraPage {
     public  utils: Utils,
     private toasts: Toasts,
     private translate: TranslateProvider,
-    private geolocation: Geolocation) {}
+    private geolocation: Geolocation,
+    private locationAccuracy: LocationAccuracy) {}
 
     ionViewDidLoad() {
+
+      this.locationAccuracy.canRequest().then((canRequest: boolean) => {
+
+        if(canRequest) {
+          
+          this.locationAccuracy.request(this.locationAccuracy.REQUEST_PRIORITY_BALANCED_POWER_ACCURACY).then(
+            () => console.log('Request successful'),
+            error => console.log('Error requesting location permissions', error)
+          );
+        }
+      });
+
     this.currentTest = this.dataService.getCurrentTest();
     this.testStep = this.currentTest.step;
 
@@ -160,6 +174,15 @@ export class CameraPage {
           break;
       }
     }
+  }
+
+  showAlert(Title, subTitle, buttons) {
+    let alert = this.alertCtrl.create({
+      title: Title,
+      subTitle: subTitle,
+      buttons: buttons
+    });
+    alert.present();
   }
 
   addTestComment() {

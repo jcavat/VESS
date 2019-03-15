@@ -1,4 +1,4 @@
-import { User } from './../../models/user';
+import { User, UserType } from './../../models/user';
 import { Component } from '@angular/core';
 import { ModalController, NavController, NavParams } from 'ionic-angular';
 
@@ -39,6 +39,9 @@ export class HomePage {
       if (value != null) {
         this.user = value;
         this.translate.setLang(this.user.language);
+        if(this.user.userType === UserType.Ofag){
+          this.gpsService.askGPSPermission();
+        }
       } else {
         this.translate.setLang('fr'); // Default language (before the user sets the one s/he prefers).
       }
