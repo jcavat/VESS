@@ -30,7 +30,7 @@ export class GpsServiceProvider {
     this.diagnostic.getLocationAuthorizationStatus().then(
       status => {
         switch(status){
-          // If Location service not yet enabled or previously denied, request authorization
+          // If Location service is not yet enabled or was previously denied, request authorization
           case permissionStatus.NOT_REQUESTED:
           case permissionStatus.DENIED:
             this.diagnostic.requestLocationAuthorization().then(
@@ -40,41 +40,70 @@ export class GpsServiceProvider {
                   case permissionStatus.DENIED:
                     console.log("Authorization denied");
                     this.showAlert("Avertissement", 
-                    "Cette application a besoin de la localisation afin de fonctionner normalement.",
+                    "Cette application a besoin de la localisation afin de fonctionner normalement.\n\
+                    Appuyer sur \"Recommencer\" pour redemander les droits de localisation.",
                       [
                         {
-                          text: "Quitter l'application",
-                          handler: () => {
-                            this.platform.exitApp();
-                          }
-                        },
-                        {
-                          text: "OK",
+                          text: "Recommencer",
                           handler: () => {
                             this.askGPSPermission();
                           }
+                        },
+                        {
+                          text: "Annuler",
+                          handler: () => {}
                         }
                       ]
                     );
                     break;
                   
                   case permissionStatus.DENIED_ALWAYS:
-                    
+                  this.showAlert("Avertissement", 
+                  "L'application n'a pas les droits nécessaires pour accèder aux services de localisation.\n\
+                  Veuillez autoriser l'accès à la localisation dans les paramètres de l'appareil.",
+                    [
+                      "Annuler",
+                      {
+                        text: "Ouvrir paramètres",
+                        handler: () => {
+                          this.diagnostic.switchToSettings();
+                        }
+                      }
+                    ]
+                  );
+                  break;
+
                   default:
                 }
               }
             );
-            default:
+          case permissionStatus.DENIED_ALWAYS:
+            this.showAlert("Avertissement", 
+            "L'application n'a pas les droits nécessaires pour accèder aux services de localisation.\n\
+            Veuillez autoriser l'accès à la localisation dans les paramètres de l'appareil.",
+              [
+                "Annuler",
+                {
+                  text: "Ouvrir paramètres",
+                  handler: () => {
+                    this.diagnostic.switchToSettings();
+                  }
+                }
+              ]
+            );
+          default:
         }
       }
     )
 
   }
 
+  
+
   private showAlert(Title, subTitle, buttons) {
     let alert = this.alertCtrl.create({
       title: Title,
-      subTitle: subTitle,
+      message: subTitle,
       buttons: buttons
     });
     alert.present();
