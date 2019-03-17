@@ -67,7 +67,7 @@ export class UploadProvider {
 
     if (!testJSON.comment) testJSON.comment = "";
     if (!testJSON.geolocation) testJSON.geolocation = {longitude: -1, latitude: -1};
-    if (!testJSON.user.farmerID) testJSON.user.farmerID = "";
+    if (!testJSON.user.farmerID) testJSON.user.farmerID = test.user.idOfag ? test.user.idOfag : "";
 
     let promiseBlockEncoded : Promise<String> = undefined;
     if(testJSON.picture) {
