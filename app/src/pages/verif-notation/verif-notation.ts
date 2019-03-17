@@ -1,4 +1,5 @@
 import { Layer, Test, Steps } from './../../models/parcel';
+import { User } from '../../models/user';
 import { Component } from '@angular/core';
 import { NavController, NavParams, ModalController, Platform, AlertController } from 'ionic-angular';
 // Pages
@@ -330,7 +331,8 @@ export class VerifNotationPage {
 
     this.dataService.getUserInfo().then((value) => {
       if (value != null) {
-        this.currentTest.user = value;
+        // We copy the user info so they can't be changed later
+        this.currentTest.user = new User(value); 
         this.currentTest.isCompleted = true;
         this.currentTest.score = testScore;
         this.dataService.saveParcels();
