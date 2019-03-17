@@ -77,6 +77,7 @@
   "MISSING_TEXT": "[Texte manquant ({{key}})]",
   "MUST_BE": "doit être",
   "NAME": "Nom",
+  "NETWORK_NOT_AVAILABLE": "L'appareil n'est pas connecté à internet. Veuillez réessayer après vous être connecté.",
   "NEXT": "Suivant",
   "NO": "Non",
   "NO_REDO_NOTATION": "Non, recommencer la notation",

@@ -1,5 +1,6 @@
 import { Http, Headers } from '@angular/http';
 import { Injectable } from '@angular/core';
+import { Network } from '@ionic-native/network';
 
 // Providers
 import { DataService } from '../../providers/data-service';
@@ -27,7 +28,8 @@ export class UploadProvider {
               private dataService: DataService,
               private translate: TranslateProvider,
               private alertCtrl: AlertController,
-              private loadingController: LoadingController) {}
+              private loadingController: LoadingController,
+              private network: Network) {}
 
 
   public askUpload(test: Test){
@@ -44,8 +46,13 @@ export class UploadProvider {
       }
     ])
   }
-  
+
   private uploadTest(test: Test){
+
+    if(this.network.type === 'none'){
+      this.showAlert(this.translate.get("ERROR"), this.translate.get("NETWORK_NOT_AVAILABLE"), ["OK"]);
+      return;
+    }
     
     const loading : Loading = this.loadingController.create({
       content: this.translate.get("UPLOAD_IN_PROGRESS"),
