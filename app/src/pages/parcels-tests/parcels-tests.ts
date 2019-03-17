@@ -280,7 +280,7 @@ export class ParcelsTestsPage {
           let test = new Test({
             id: testId,
             name: this.translate.get("TEST") + " " + testId,
-            date: Utils.getCurrentDatetime("dd/MM/y"),
+            date: Utils.getCurrentDatetime("dd/MM/y - HH:mm"),
             step: Steps.EXTRACTING_BLOCK,
             parcel: {num: currentParcel.ofag, name: currentParcel.name },
             isUploaded: false
