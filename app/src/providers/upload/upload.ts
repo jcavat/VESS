@@ -6,7 +6,7 @@ import { DataService } from '../../providers/data-service';
 import { TranslateProvider } from '../../providers/translate/translate'
 import { Utils } from '../../providers/utils';
 import { Test } from '../../models/parcel';
-import { LoadingController, Loading } from 'ionic-angular';
+import { LoadingController, Loading, AlertController } from 'ionic-angular';
 
 /*
   Generated class for the UploadProvider provider.
@@ -18,12 +18,14 @@ import { LoadingController, Loading } from 'ionic-angular';
 export class UploadProvider {
 
   readonly URL_SERVER_BASE : string = "http://129.194.186.122:8080/";
-  readonly URL_SERVER_UPLOAD : string = this.URL_SERVER_BASE + 'measurement';
+  readonly URL_SERVER_UPLOAD : string = this.URL_SERVER_BASE + 'measurements';
+  readonly AUTH_TOKEN : string = "ABCD";
 
 
 
   constructor( public http: Http, 
               private dataService: DataService,
+              public alertCtrl: AlertController,
               private loadingController: LoadingController) {}
 
   public uploadTest(test: Test){
@@ -69,7 +71,7 @@ export class UploadProvider {
 
     let req_headers = new Headers({
       'Content-Type': 'application/json',
-      'Authorization' : 'Bearer ABCD'
+      'Authorization' : 'Bearer ' + this.AUTH_TOKEN
     });
     
 
@@ -96,11 +98,13 @@ export class UploadProvider {
         res => {
           test.isUploaded = true;
           this.dataService.saveParcels();
-
           loading.dismissAll();
+          this.showAlert("Upload successful.","",["OK"]);
+          
         },
         err => {
           loading.dismissAll();
+          this.showAlert("Upload successful.",err,["OK"]);
         }
       );
    });
@@ -129,6 +133,15 @@ export class UploadProvider {
 
       img.src = path;
     });
+  }
+
+  showAlert(Title, subTitle, buttons) {
+    let alert = this.alertCtrl.create({
+      title: Title,
+      subTitle: subTitle,
+      buttons: buttons
+    });
+    alert.present();
   }
 
 }
