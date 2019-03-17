@@ -214,6 +214,9 @@
     }
   },
   "TYPE_OF_SOIL": "Type of soil",
+  "UPLOAD_IN_PROGRESS": "Upload in progress...",
+  "UPLOAD_SUCCEED": "Upload succeeded",
+  "UPLOAD_FAILED": "Upload failed",
   "USER_NAME": "User name",
   "USER_TYPE": "User type",
   "VALIDATE": "Validate",

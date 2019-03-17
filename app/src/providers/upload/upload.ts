@@ -23,15 +23,16 @@ export class UploadProvider {
 
 
 
-  constructor( public http: Http, 
+  constructor(public http: Http, 
               private dataService: DataService,
-              public alertCtrl: AlertController,
+              private translate: TranslateProvider,
+              private alertCtrl: AlertController,
               private loadingController: LoadingController) {}
 
   public uploadTest(test: Test){
     
     const loading : Loading = this.loadingController.create({
-      content: 'Uploading...',
+      content: this.translate.get("UPLOAD_IN_PROGRESS"),
       duration: 10000
     });
 
@@ -99,12 +100,12 @@ export class UploadProvider {
           test.isUploaded = true;
           this.dataService.saveParcels();
           loading.dismissAll();
-          this.showAlert("Upload successful.","",["OK"]);
+          this.showAlert(this.translate.get("UPLOAD_SUCCEED"),"",["OK"]);
           
         },
         err => {
           loading.dismissAll();
-          this.showAlert("Upload successful.",err,["OK"]);
+          this.showAlert(this.translate.get("UPLOAD_FAILED"),err,["OK"]);
         }
       );
    });

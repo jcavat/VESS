@@ -214,6 +214,9 @@
     }
   },
   "TYPE_OF_SOIL": "Type de sol",
+  "UPLOAD_IN_PROGRESS": "Envoi des données en cours...",
+  "UPLOAD_SUCCEED": "Envoi terminé avec succès",
+  "UPLOAD_FAILED": "L'envoi a échoué",
   "USER_NAME": "Nom de l'utilisateur",
   "USER_TYPE": "Type d'utilisateur",
   "VALIDATE": "Valider",
