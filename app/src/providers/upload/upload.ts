@@ -29,7 +29,23 @@ export class UploadProvider {
               private alertCtrl: AlertController,
               private loadingController: LoadingController) {}
 
-  public uploadTest(test: Test){
+
+  public askUpload(test: Test){
+
+    this.showAlert("",this.translate.get("UPLOAD_ASK"),
+    [
+      {
+      text:"OK",
+      handler: () => this.uploadTest(test)
+      },
+      {
+        text: this.translate.get("CANCEL"),
+        role: "cancel"
+      }
+    ])
+  }
+  
+  private uploadTest(test: Test){
     
     const loading : Loading = this.loadingController.create({
       content: this.translate.get("UPLOAD_IN_PROGRESS"),

@@ -1,5 +1,5 @@
 import { Layer, Test, Steps } from './../../models/parcel';
-import { User } from '../../models/user';
+import { User, UserType } from '../../models/user';
 import { Component } from '@angular/core';
 import { NavController, NavParams, ModalController, Platform, AlertController } from 'ionic-angular';
 // Pages
@@ -336,7 +336,9 @@ export class VerifNotationPage {
         this.currentTest.isCompleted = true;
         this.currentTest.score = testScore;
         this.dataService.saveParcels();
-        this.uploadProvider.uploadTest(this.currentTest);
+        //upload only available for Ofag users
+        if(this.currentTest.user.userType === UserType.Ofag)
+          this.uploadProvider.askUpload(this.currentTest);
 
         //show resume
         this.modalCtrl.create(ModalPicturePage, { type: "resume", resume: this.currentTest }).present();

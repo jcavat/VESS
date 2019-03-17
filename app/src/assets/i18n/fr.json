@@ -214,6 +214,7 @@
     }
   },
   "TYPE_OF_SOIL": "Type de sol",
+  "UPLOAD_ASK": "Voulez-vous envoyer ces données à Terre Vivante ?",
   "UPLOAD_IN_PROGRESS": "Envoi des données en cours...",
   "UPLOAD_SUCCEED": "Envoi terminé avec succès",
   "UPLOAD_FAILED": "L'envoi a échoué",
