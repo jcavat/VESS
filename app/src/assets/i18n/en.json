@@ -95,6 +95,7 @@
   "NUMBER_OF_LAYERS": "Number of layers",
   "OFAG_ID": "OFAG ID",
   "PARCEL": "Parcel",
+  "PARCEL_ID": "Parcel ID",
   "PARCEL_NAME": "Parcel : {{name}}",
   "PICTURE_OF_LAYER": "Picture layer",
   "PARCELS": "Parcels",
@@ -213,6 +214,10 @@
     }
   },
   "TYPE_OF_SOIL": "Type of soil",
+  "UPLOAD_ASK": "Do you want to send these data to Terre Vivante ?",
+  "UPLOAD_IN_PROGRESS": "Upload in progress...",
+  "UPLOAD_SUCCEED": "Upload succeeded",
+  "UPLOAD_FAILED": "Upload failed",
   "USER_NAME": "User name",
   "USER_TYPE": "User type",
   "VALIDATE": "Validate",

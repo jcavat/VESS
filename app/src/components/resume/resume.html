@@ -1,12 +1,17 @@
 <ion-grid>
   <ion-row>
-    <ion-col col-9>
+    <ion-col col-8>
       <!--<ion-label stacked color="brown">{{ 'TEST_NAME' | translate }}</ion-label>-->
       <ion-label color="brown" id="title">{{resume.name}}</ion-label>
     </ion-col>
-    <ion-col col-3>
-      <button ion-button item-right icon-only color="green" (click)="exportTest($event)">
-        <ion-icon name="download"></ion-icon>
+    <ion-col col-2>
+      <button ion-button item-right icon-only color="blue" (click)="exportTest($event)">
+        <ion-icon name="share-alt"></ion-icon>
+      </button>
+    </ion-col>
+    <ion-col col-2>
+      <button ion-button item-right icon-only color="green" [hidden]="resume.user.userType === 'anonymous'" [disabled]="resume.isUploaded" (click)="uploadTest($event)">
+        <ion-icon name="cloud-upload"></ion-icon>
       </button>
     </ion-col>
   </ion-row>

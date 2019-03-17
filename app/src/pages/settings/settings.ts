@@ -83,10 +83,12 @@ export class SettingsPage {
   }
 
   onUserTypeChange(userTypeSelect : HTMLSelectElement) {
+    /*
     if (userTypeSelect.value === UserType.Ofag) {
       this.toasts.showToast(this.translate.get('FUNCTIONALITY_NOT_YET_AVAILABLE'));
       this.userType = UserType.Anonymous;
       userTypeSelect.value = UserType.Anonymous;
     }
+    */
   }
 }

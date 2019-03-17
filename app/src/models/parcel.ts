@@ -35,6 +35,8 @@ export class Test {
   public comment?: string;
   public layers?: Layer[] = [];
   public soilState?: string;
+  public parcel: {num: String, name: String};
+  public isUploaded: Boolean = false;
 
   public constructor(init: Test) {
     Object.assign(this, init);

@@ -8,6 +8,7 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
 // Providers
 import { DataService } from './../../providers/data-service';
 import { Utils } from "./../../providers/utils";
+import { UploadProvider } from '../../providers/upload/upload';
 
 export class LayerInfo {
   public img?: string;
@@ -34,7 +35,8 @@ export class ResumeComponent {
   constructor(
     private dataService: DataService,
     public navCtrl: NavController,
-    private iab : InAppBrowser
+    private iab : InAppBrowser,
+    private uploadService : UploadProvider
   ) {}
 
   ngOnInit() {
@@ -69,5 +71,10 @@ export class ResumeComponent {
 
   exportTest(event) {
     this.navCtrl.push(ExportPage, { test: this.resume });
+  }
+
+  uploadTest(event) {
+    if(!this.resume.isUploaded)
+      this.uploadService.askUpload(this.resume);
   }
 }

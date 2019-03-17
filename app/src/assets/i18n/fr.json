@@ -95,6 +95,7 @@
   "NUMBER_OF_LAYERS": "Nombre de couches",
   "OFAG_ID": "Identifiant OFAG",
   "PARCEL": "Parcelle",
+  "PARCEL_ID": "Numéro de Parcelle",
   "PARCEL_NAME": "Parcelle : {{name}}",
   "PARCELS": "Parcelles",
   "PARCELS_TO_TEST": "Parcelles à tester",
@@ -213,6 +214,10 @@
     }
   },
   "TYPE_OF_SOIL": "Type de sol",
+  "UPLOAD_ASK": "Voulez-vous envoyer ces données à Terre Vivante ?",
+  "UPLOAD_IN_PROGRESS": "Envoi des données en cours...",
+  "UPLOAD_SUCCEED": "Envoi terminé avec succès",
+  "UPLOAD_FAILED": "L'envoi a échoué",
   "USER_NAME": "Nom de l'utilisateur",
   "USER_TYPE": "Type d'utilisateur",
   "VALIDATE": "Valider",

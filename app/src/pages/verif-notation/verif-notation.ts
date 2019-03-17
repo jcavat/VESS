@@ -1,4 +1,5 @@
 import { Layer, Test, Steps } from './../../models/parcel';
+import { User, UserType } from '../../models/user';
 import { Component } from '@angular/core';
 import { NavController, NavParams, ModalController, Platform, AlertController } from 'ionic-angular';
 // Pages
@@ -11,6 +12,7 @@ import { RulerService } from '../../providers/ruler-service';
 import { Toasts } from '../../providers/toasts';
 import { TranslateProvider } from '../../providers/translate/translate'
 import { Utils } from './../../providers/utils';
+import { UploadProvider } from '../../providers/upload/upload';
 
 /**
  * Validation of the layer notation. User must check multiples criterias.
@@ -44,7 +46,8 @@ export class VerifNotationPage {
     private platform: Platform,
     public rulerService: RulerService,
     private toasts: Toasts,
-    private translate: TranslateProvider) { }
+    private translate: TranslateProvider,
+    private uploadProvider: UploadProvider) { }
 
   ionViewDidLoad() {
     this.currentLayer = this.dataService.getCurrentLayer();
@@ -336,15 +339,21 @@ export class VerifNotationPage {
 
     this.dataService.getUserInfo().then((value) => {
       if (value != null) {
-        this.currentTest.user = value;
+        // We copy the user info so they can't be changed later
+        this.currentTest.user = new User(value); 
+        this.currentTest.isCompleted = true;
+        this.currentTest.score = testScore;
         this.dataService.saveParcels();
+        //upload only available for Ofag users
+        if(this.currentTest.user.userType === UserType.Ofag)
+          this.uploadProvider.askUpload(this.currentTest);
+
+        //show resume
+        this.modalCtrl.create(ModalPicturePage, { type: "resume", resume: this.currentTest }).present();
       }
     });
-    this.currentTest.isCompleted = true;
-    this.currentTest.score = testScore;
-    this.dataService.saveParcels();
-    //show resume
-    this.modalCtrl.create(ModalPicturePage, { type: "resume", resume: this.currentTest }).present();
+    
+
     //go to the home view
     this.navCtrl.popToRoot();
   }
