@@ -231,8 +231,12 @@ export class VerifNotationPage {
       if(hasPositiveCrit && hasNegativeCrit) {
         this.showAlert(this.translate.get('VALIDATION'),
         this.translate.get('VALIDATION_ENOUGH_VALID_CRITERIA', { score: this.score }),
-        ['OK']);
-        this.goToNextLayerOrHome();
+        [
+          {
+            text:"OK",
+            handler: () => this.goToNextLayerOrHome()
+          }
+        ]);
       }
       else{
         let alertTitle = "";
@@ -255,8 +259,12 @@ export class VerifNotationPage {
       if (((cntChecked >= 2) && (cntCriteria == 3)) || ((cntChecked >= 3) && (cntCriteria == 4))) {//Notation ok
         this.showAlert(this.translate.get('VALIDATION'),
           this.translate.get('VALIDATION_ENOUGH_VALID_CRITERIA', { score: this.score }),
-          ['OK']);
-        this.goToNextLayerOrHome();
+          [
+            {
+              text:"OK",
+              handler: () => this.goToNextLayerOrHome()
+            }
+          ]);
       } else if (cntChecked == 0) {//Return to decision tree on wrong result
         this.showAlert(this.translate.get('NO_VALIDATED_CRITERIA'),
           this.translate.get('VALIDATION_NO_VALID_CRITERIA'),
