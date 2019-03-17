@@ -10,7 +10,7 @@
       </button>
     </ion-col>
     <ion-col col-3>
-      <button ion-button item-right icon-only color="green" [disabled]="resume.isUploaded" (click)="uploadTest($event)">
+      <button ion-button item-right icon-only color="green" [hidden]="resume.user.userType === 'anonymous'" [disabled]="resume.isUploaded" (click)="uploadTest($event)">
         <ion-icon name="cloud-upload"></ion-icon>
       </button>
     </ion-col>
