@@ -21,6 +21,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { Toast } from '@ionic-native/toast';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
+import { BackgroundMode } from '@ionic-native/background-mode'
 
 // Pages
 import { CameraPage } from '../pages/camera/camera';
@@ -130,6 +131,7 @@ export function createTranslateLoader(http: Http) {
   ],
   providers: [
     InAppBrowser,
+    BackgroundMode,
     Camera,
     DataService,
     EmailComposer,
