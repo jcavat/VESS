@@ -141,12 +141,12 @@ export class UploadProvider {
       var ctx = c.getContext("2d");
       var img = new Image();
       img.onload = function() {
-        c.width = 1280;
-        c.height = 720;
+        c.width = img.width;
+        c.height = img.height;
 
         ctx.drawImage(img, 0, 0);
 
-        var dataUri = c.toDataURL("image/jpg");
+        var dataUri = c.toDataURL("image/jpeg");
         
         resolve(dataUri);
       };
