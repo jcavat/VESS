@@ -1,6 +1,6 @@
 {
   "name": "vess",
-  "author": "Michael POLLA, Salvatore CICCIU",
+  "author": "Michael POLLA, Salvatore CICCIU, Fabio VITALI",
   "private": true,
   "scripts": {
     "start": "ionic-app-scripts serve",
