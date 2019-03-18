@@ -39,15 +39,10 @@ export class HomePage {
       if (value != null) {
         this.user = value;
         this.translate.setLang(this.user.language);
-        if(this.user.userType === UserType.Ofag){
-          this.gpsService.askGPSPermission();
-        }
       } else {
         this.translate.setLang('fr'); // Default language (before the user sets the one s/he prefers).
       }
     });
-
-    this.gpsService.askGPSPermission();
   }
 
   ionViewDidEnter() {
@@ -56,6 +51,9 @@ export class HomePage {
       this.dataService.getUserInfo().then((value) => {
         if (value != null) {
           this.user = value;
+          if(this.user.userType === UserType.Ofag){
+            this.gpsService.askGPSPermission();
+          }
         }
       });
     }

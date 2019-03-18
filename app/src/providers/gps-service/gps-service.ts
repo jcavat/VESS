@@ -80,6 +80,7 @@ export class GpsServiceProvider {
                 }
               }
             );
+            break;
           case permissionStatus.DENIED_ALWAYS:
             this.showAlert(this.translate.get("WARNING"), 
             this.translate.get("LOCATION_PERMISSION_DENIED_ALWAYS"),
