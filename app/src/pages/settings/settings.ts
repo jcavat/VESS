@@ -74,6 +74,7 @@ export class SettingsPage {
     } else {
       this.toasts.showToast(this.translate.get('SETTINGS_SAVE'));
       this.dataService.save("user", this.user);
+      this.navCtrl.pop();
     }
   }
 
