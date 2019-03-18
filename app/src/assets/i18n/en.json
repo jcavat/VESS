@@ -74,6 +74,8 @@
   "LAYER_APPEARANCE": "Layer appearance",
   "LAYER_SIZE": "Layer size",
   "LAYER_TITLE": "Layers details",
+  "LOCATION_PERMISSION_DENIED": "This app needs location to function normally. Press \"Try again to ask the location permission again.",
+  "LOCATION_PERMISSION_DENIED_ALWAYS": "This app doesn't have the needed permission to use location services. Please enable location permissions in the device settings.",
   "MISSING_TEXT": "[Missing translation ({{key}})]",
   "MUST_BE": "must be",
   "NAME": "Name",
@@ -118,6 +120,7 @@
   "SCORE_INDICATIVE": "Indicative score without the last layer",
   "SCORE_RELIABILITY": "Indicative",
   "SETTINGS": "Settings",
+  "SETTINGS_OPEN": "Open settings",
   "SETTINGS_SAVE": "Data successfully saved",
   "SHOW_SUMMARY": "Show summary",
   "SIZE_AND_APPEARANCE": "Size and appearance",
@@ -214,6 +217,7 @@
       "INSTRUCTIONS": "Breaking a firm clod reveals non porous angular faces. Presence of macropores and cracks possible. During breaking, the clod is broken straight where pressure is applied."
     }
   },
+  "TRY_AGAIN": "Try again",
   "TYPE_OF_SOIL": "Type of soil",
   "UPLOAD_ASK": "Do you want to send these data to Terre Vivante ?",
   "UPLOAD_IN_PROGRESS": "Upload in progress...",
@@ -255,5 +259,6 @@
   "VISIBLE_COARSE_PORE": "Visible coarse pore",
   "VISIBLE_COARSE_PORE_DEFINITION": "(FR) Pore de plus de 2 mm.",
   "VISIBLE_POROSITY_AND_ROOTS": "Visible porosity and roots",
+  "WARNING": "Warning",
   "YES": "Yes"
 }

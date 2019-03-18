@@ -74,6 +74,8 @@
   "LAYER_APPEARANCE": "Apparence de la couche",
   "LAYER_SIZE": "Taille de la couche",
   "LAYER_TITLE": "Détails des couches",
+  "LOCATION_PERMISSION_DENIED": "Cette application a besoin de la localisation afin de fonctionner normalement. Appuyer sur \"Recommencer\" pour redemander les droits de localisation.",
+  "LOCATION_PERMISSION_DENIED_ALWAYS": "L'application n'a pas les droits nécessaires pour accèder aux services de localisation. Veuillez autoriser l'accès à la localisation dans les paramètres de l'appareil.",
   "MISSING_TEXT": "[Texte manquant ({{key}})]",
   "MUST_BE": "doit être",
   "NAME": "Nom",
@@ -118,6 +120,7 @@
   "SCORE_INDICATIVE": "Score indicatif sans la dernière couche",
   "SCORE_RELIABILITY": "Indicatif",
   "SETTINGS": "Paramètres",
+  "SETTINGS_OPEN": "Ouvrir paramètres",
   "SETTINGS_SAVE": "Les données ont bien été enregistrées",
   "SHOW_SUMMARY": "Afficher le résumé",
   "SIZE_AND_APPEARANCE": "Taille et apparence",
@@ -214,6 +217,7 @@
       "INSTRUCTIONS": "Briser une motte fermée révèle des faces angulaires non poreuses. Présence de macropores et de fissures possibles. En brisant la motte, une cassure droite se forme à l’endroit où on applique la pression."
     }
   },
+  "TRY_AGAIN": "Recommencer",
   "TYPE_OF_SOIL": "Type de sol",
   "UPLOAD_ASK": "Voulez-vous envoyer ces données à Terre Vivante ?",
   "UPLOAD_IN_PROGRESS": "Envoi des données en cours...",
@@ -255,5 +259,6 @@
   "VISIBLE_COARSE_PORE": "Pore visible grossier",
   "VISIBLE_COARSE_PORE_DEFINITION": "Pore de plus de 2 mm.",
   "VISIBLE_POROSITY_AND_ROOTS": "Porosité visible et racines",
+  "WARNING": "Avertissement",
   "YES": "Oui"
 }
