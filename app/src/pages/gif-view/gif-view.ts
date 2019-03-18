@@ -55,6 +55,7 @@ export class GifViewPage {
         this.navCtrl.push(GifViewPage);
         break;
       case Steps.OPENING_BLOCK:
+      default:
         if (this.platform.is("core")) {
           this.currentTest.step = Steps.DEFINING_LAYERS;
           this.navCtrl.push(DefiningLayerPage);
