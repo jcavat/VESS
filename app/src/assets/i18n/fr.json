@@ -48,6 +48,7 @@
   "ERROR_SAVING_PICTURE": "Erreur lors de l'enregistrement de l'image.",
   "ERROR_SIZE_OF_LAYERS": "La taille totale des couches ne correspond pas à l'épaisseur du bloc.",
   "EXPORT": "Exporter",
+  "FARMER_ID" : "N° d'agriculteur",
   "FINAL_SCORE": "Score final : {{score}}",
   "FINAL_SCORE_OF_TEST": "Score final du test :",
   "FUNCTIONALITY_NOT_YET_AVAILABLE": "Fonctionnalité pas encore disponible.",
