@@ -1,4 +1,5 @@
 import { Layer, Test, Steps } from './../../models/parcel';
+import { User, UserType } from '../../models/user';
 import { Component } from '@angular/core';
 import { NavController, NavParams, ModalController, Platform, AlertController } from 'ionic-angular';
 // Pages
@@ -11,6 +12,7 @@ import { RulerService } from '../../providers/ruler-service';
 import { Toasts } from '../../providers/toasts';
 import { TranslateProvider } from '../../providers/translate/translate'
 import { Utils } from './../../providers/utils';
+import { UploadProvider } from '../../providers/upload/upload';
 
 /**
  * Validation of the layer notation. User must check multiples criterias.
@@ -28,8 +30,8 @@ export class VerifNotationPage {
   heightRuler: number;
   score: number;
   private helpId: string;
-  items: Array<{ title: string, checked: Boolean, imgSrc?: string, code: number }>;
-  criterias: Array<{ title: string, array: Array<{ title: string, checked: Boolean, imgSrc?: string, code: number }> }>;
+  items: Array<{ title: string, checked: boolean, imgSrc?: string, code: number }>;
+  criterias: Array<{ title: string, array: Array<{ title: string, checked: boolean, imgSrc?: string, code: number }> }>;
   private currentLayer: Layer;
   private currentTest: Test;
   private nextLayerIndex: number;
@@ -44,7 +46,8 @@ export class VerifNotationPage {
     private platform: Platform,
     public rulerService: RulerService,
     private toasts: Toasts,
-    private translate: TranslateProvider) { }
+    private translate: TranslateProvider,
+    private uploadProvider: UploadProvider) { }
 
   ionViewDidLoad() {
     this.currentLayer = this.dataService.getCurrentLayer();
@@ -84,7 +87,7 @@ export class VerifNotationPage {
             {
               title: this.translate.get('VERIF_SCORE1_CRITERIA1_CHECK3'),
               checked: false,
-              imgSrc: './assets/pictures/sq2_1cm.jpg',
+              imgSrc: './assets/pictures/F4_trait_distinctif_Sq1_agregats_ronds_fins_et_poreux.JPG',
               code: 3
             }
           ];
@@ -97,7 +100,7 @@ export class VerifNotationPage {
             {
               title: this.translate.get('VERIF_SCORE2_CRITERIA1_CHECK1'),
               checked: false,
-              imgSrc: './assets/pictures/no_picture.png',
+              imgSrc: './assets/pictures/D8_Sq2__forte_porosite_intra_agregat.JPG',
               code: 1
             },
             {
@@ -109,7 +112,7 @@ export class VerifNotationPage {
             {
               title: this.translate.get('VERIF_SCORE2_CRITERIA1_CHECK3'),
               checked: false,
-              imgSrc: './assets/pictures/no_picture.png',
+              imgSrc: './assets/pictures/F7_agegats_arrondis_et_poreux_maintenus_par_des_racines.jpg',
               code: 3
             }
           ];
@@ -122,7 +125,7 @@ export class VerifNotationPage {
             {
               title: this.translate.get('VERIF_SCORE3_CRITERIA1_CHECK1'),
               checked: false,
-              imgSrc: './assets/pictures/no_picture.png',
+              imgSrc: './assets/pictures/D8_Sq2__forte_porosite_intra_agregat.JPG',
               code: 1
             },
             {
@@ -134,14 +137,14 @@ export class VerifNotationPage {
             {
               title: this.translate.get('VERIF_SCORE3_CRITERIA1_CHECK3'),
               checked: false,
-              imgSrc: './assets/pictures/sq2_1cm.jpg',
+              imgSrc: './assets/pictures/D10_trait_distinctif_Sq2__forte_porosite.JPG',
               code: 3
             }
           ];
           this.criterias = [{ title: this.translate.get('VERIF_SCORE3_CRITERIA1_TITLE'), array: this.items }];
           this.criterias.push({
             title: this.translate.get('VERIF_SCORE3_CRITERIA2_TITLE'),
-            array: [{ title: this.translate.get('YES'), checked: false, imgSrc: './assets/pictures/motte_fermee.jpg', code: 1 }]
+            array: [{ title: this.translate.get('YES'), checked: false, imgSrc: './assets/pictures/D11_Sq4_fragment_brise2.JPG', code: 1 }]
           });
           this.helpId = "help_verif_score3";
           break;
@@ -150,18 +153,18 @@ export class VerifNotationPage {
           this.items = [
             {
               title: this.translate.get('VERIF_SCORE4_CRITERIA1_CHECK1'),
-              checked: false, imgSrc: './assets/pictures/fragment_1cm.jpg',
+              checked: false, imgSrc: './assets/pictures/F12.JPG',
               code: 1
             },
             {
               title: this.translate.get('VERIF_SCORE4_CRITERIA1_CHECK2'),
               checked: false,
-              imgSrc: './assets/pictures/racine_vdt_1.jpg',
+              imgSrc: './assets/pictures/D11_Sq4_fragment_brise2.JPG',
               code: 2
             }
           ];
           this.criterias = [{ title: this.translate.get('VERIF_SCORE4_CRITERIA1_TITLE'), array: this.items }];
-          this.criterias.push({ title: this.translate.get('VERIF_SCORE4_CRITERIA2_TITLE'), array: [{ title: 'Oui', checked: false, imgSrc: './assets/pictures/racines_autour_mottes.png', code: 1 }] });
+          this.criterias.push({ title: this.translate.get('VERIF_SCORE4_CRITERIA2_TITLE'), array: [{ title: 'Oui', checked: false, imgSrc: './assets/pictures/F14_Sq5_racines_en_arretes_de_poisson.JPG', code: 1 }] });
           this.helpId = "help_verif_score4";
           break;
         case 5: // Majority of closed clods; almost no aggregates smaller than 7 cm
@@ -175,14 +178,14 @@ export class VerifNotationPage {
             {
               title: this.translate.get('VERIF_SCORE5_CRITERIA1_CHECK2'),
               checked: false,
-              imgSrc: './assets/pictures/no_picture.png',
+              imgSrc: './assets/pictures/F16_Sq5_Fragment_entier_tres_anguleux.JPG',
               code: 2
             }
           ];
           this.criterias = [{ title: this.translate.get('VERIF_SCORE5_CRITERIA1_TITLE'), array: this.items }];
           this.criterias.push({
             title: this.translate.get('VERIF_SCORE5_CRITERIA2_TITLE'),
-            array: [{ title: this.translate.get('YES'), checked: false, imgSrc: './assets/pictures/racine_vdt_1.jpg', code: 1 }]
+            array: [{ title: this.translate.get('YES'), checked: false, imgSrc: './assets/pictures/F14_Sq5_racines_en_arretes_de_poisson.JPG', code: 1 }]
           });
           this.criterias.push({
             title: this.translate.get('VERIF_SCORE5_CRITERIA3_TITLE'),
@@ -222,31 +225,69 @@ export class VerifNotationPage {
       }
     }
 
-    //Condition of criteria
-    if (((cntChecked >= 2) && (cntCriteria == 3)) || ((cntChecked >= 3) && (cntCriteria == 4))) {//Notation ok
-      this.showAlert(this.translate.get('VALIDATION'),
+    // Handle specific case of SQ3 score
+    if(this.score == 3) {
+      let hasPositiveCrit = this.criterias[0].array.some(criteria => criteria.checked);
+      let hasNegativeCrit = this.criterias[1].array.some(criteria => criteria.checked);
+
+      // SQ3 should have at least 1 positive criteria AND at least 1 negative criteria checked
+      if(hasPositiveCrit && hasNegativeCrit) {
+        this.showAlert(this.translate.get('VALIDATION'),
         this.translate.get('VALIDATION_ENOUGH_VALID_CRITERIA', { score: this.score }),
-        ['OK']);
-      this.goToNextLayerOrHome();
-    } else if (cntChecked == 0) {//Return to decision tree on wrong result
-      this.showAlert(this.translate.get('NO_VALIDATED_CRITERIA'),
-        this.translate.get('VALIDATION_NO_VALID_CRITERIA'),
-        ['OK']);
-      this.navCtrl.push(Notation1Page);
-    } else {//suggest to return to decision tree or valid notation
-      this.showAlert(this.translate.get('VALIDATION'), this.translate.get('VALIDATION_FEW_VALID_CRITERIA', { score: this.score }), [
-        {
-          text: this.translate.get('NO_REDO_NOTATION'),
-          handler: data => {
-            this.navCtrl.push(Notation1Page);
+        [
+          {
+            text:"OK",
+            handler: () => this.goToNextLayerOrHome()
           }
-        },
-        {
-          text: this.translate.get('YES'),
-          handler: data => {
-            this.goToNextLayerOrHome();
-          }
-        }]);
+        ]);
+      }
+      else{
+        let alertTitle = "";
+        let alertText = "";
+        if (hasPositiveCrit && !hasNegativeCrit){
+          alertTitle = this.translate.get('VALIDATION_INCORRECT_CRITERIAS');
+          alertText = this.translate.get('VALIDATION_NO_NEGATIVE_CRITERIA')
+        } else {
+          alertTitle = this.translate.get('VALIDATION_INCORRECT_CRITERIAS');
+          alertText = this.translate.get('VALIDATION_NOT_ENOUGH_CRITERIA');
+        }
+
+        this.showAlert(alertTitle, alertText, ['OK']);
+        this.navCtrl.push(Notation1Page);
+      }
+    }
+    else { // if score is not 3
+
+      //Condition of criteria
+      if (((cntChecked >= 2) && (cntCriteria == 3)) || ((cntChecked >= 3) && (cntCriteria == 4))) {//Notation ok
+        this.showAlert(this.translate.get('VALIDATION'),
+          this.translate.get('VALIDATION_ENOUGH_VALID_CRITERIA', { score: this.score }),
+          [
+            {
+              text:"OK",
+              handler: () => this.goToNextLayerOrHome()
+            }
+          ]);
+      } else if (cntChecked == 0) {//Return to decision tree on wrong result
+        this.showAlert(this.translate.get('NO_VALIDATED_CRITERIA'),
+          this.translate.get('VALIDATION_NO_VALID_CRITERIA'),
+          ['OK']);
+        this.navCtrl.push(Notation1Page);
+      } else {//suggest to return to decision tree or valid notation
+        this.showAlert(this.translate.get('VALIDATION'), this.translate.get('VALIDATION_FEW_VALID_CRITERIA', { score: this.score }), [
+          {
+            text: this.translate.get('NO_REDO_NOTATION'),
+            handler: data => {
+              this.navCtrl.push(Notation1Page);
+            }
+          },
+          {
+            text: this.translate.get('YES'),
+            handler: data => {
+              this.goToNextLayerOrHome();
+            }
+          }]);
+      }
     }
   }
 
@@ -261,9 +302,10 @@ export class VerifNotationPage {
       this.currentTest.step = Steps.PICTURE_LAYER;
         this.navCtrl.push(CameraPage);
       }
-      else
+      else {
         this.currentTest.step = Steps.NOTATION;
         this.navCtrl.push(Notation1Page);
+      }
     } else {
       this.calculateAndShowTestScore();
     }
@@ -297,15 +339,21 @@ export class VerifNotationPage {
 
     this.dataService.getUserInfo().then((value) => {
       if (value != null) {
-        this.currentTest.user = value;
+        // We copy the user info so they can't be changed later
+        this.currentTest.user = new User(value); 
+        this.currentTest.isCompleted = true;
+        this.currentTest.score = testScore;
         this.dataService.saveParcels();
+        //upload only available for Ofag users
+        if(this.currentTest.user.userType === UserType.Ofag)
+          this.uploadProvider.askUpload(this.currentTest);
+
+        //show resume
+        this.modalCtrl.create(ModalPicturePage, { type: "resume", resume: this.currentTest }).present();
       }
     });
-    this.currentTest.isCompleted = true;
-    this.currentTest.score = testScore;
-    this.dataService.saveParcels();
-    //show resume
-    this.modalCtrl.create(ModalPicturePage, { type: "resume", resume: this.currentTest }).present();
+    
+
     //go to the home view
     this.navCtrl.popToRoot();
   }

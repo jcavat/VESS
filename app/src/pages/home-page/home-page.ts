@@ -1,4 +1,4 @@
-import { User } from './../../models/user';
+import { User, UserType } from './../../models/user';
 import { Component } from '@angular/core';
 import { ModalController, NavController, NavParams } from 'ionic-angular';
 
@@ -14,6 +14,7 @@ import { TutorialPage } from './../tutorial/tutorial';
 import { DataService } from '../../providers/data-service';
 import { Toasts } from './../../providers/toasts';
 import { TranslateProvider } from './../../providers/translate/translate';
+import { GpsServiceProvider } from './../../providers/gps-service/gps-service'
 
 
 @Component({
@@ -28,6 +29,7 @@ export class HomePage {
     public modalCtrl: ModalController,
     public navCtrl: NavController,
     public navParams: NavParams,
+    private gpsService : GpsServiceProvider,
     private toasts: Toasts,
     private translate: TranslateProvider) {
   }
@@ -49,6 +51,9 @@ export class HomePage {
       this.dataService.getUserInfo().then((value) => {
         if (value != null) {
           this.user = value;
+          if(this.user.userType === UserType.Ofag){
+            this.gpsService.askGPSPermission();
+          }
         }
       });
     }

@@ -61,19 +61,14 @@ export class ExportPage {
   }
 
   strJSONToCSV(string) {
-    var csv = ',first name,last name,user type,mail\r\n';
-    csv += 'userInfo,' + this.test.user.firstName + ',' + this.test.user.lastName + ',' + this.test.user.userType + ',' + this.test.user.mail + '\r\n';
-    csv += '\r\n';
-    csv += ',identifiant,depth,thickness,score,picture,date,comment,latitude,longitude\r\n';
-    for (let layer of this.test.layers) {
-      if (layer.picture != undefined) {
-        let pathFileLayer = layer.picture.split("/"); //split path 
-        csv += 'layer,' + layer.num + ',' + layer.minThickness + '-' + layer.maxThickness + ',' + layer.thickness + ',' + layer.score + ',' + pathFileLayer[1] + ',' + ',' + layer.comment + '\r\n';
-      } else {
-        csv += 'layer,' + layer.num + ',' + layer.minThickness + '-' + layer.maxThickness + ',' + layer.thickness + ',' + layer.score + ',' + 'no image,' + ',' + layer.comment + '\r\n';
-      }
-    }
+    var csv = ',first name,last name,user type,mail,farmerID\r\n';
+    csv += 'userInfo,' + this.test.user.firstName + ',' + this.test.user.lastName + ',' + (this.test.user.userType === 'ofag' ? 'Terre Vivante' : this.test.user.userType) + ',' + this.test.user.mail + ',' + ( this.test.user.idOfag  ? this.test.user.idOfag : "-");
 
+    csv += '\r\n\r\n';
+    csv += 'parcel name,parcel ID\r\n';
+    csv += this.test.parcel.name + ',';
+    csv += (this.test.parcel.num ? this.test.parcel.num : '-') + '\r\n\r\n'; 
+    
     let pathFileBloc;
     if (this.test.picture != undefined) {
       pathFileBloc = this.test.picture.split("/"); //split path
@@ -83,23 +78,39 @@ export class ExportPage {
       pathFileBloc = 'no image'
     }
 
+    csv += ',identifiant,depth,thickness,score,picture,date,comment,latitude,longitude\r\n';
+    csv += 'test,' + this.test.name + ',' + '0-' + this.test.thickness + ',' + this.test.thickness + ',' + this.test.score + ',' + pathFileBloc + ',' + this.test.date + ',' + this.test.comment + ',';
+
+
     if (this.test.geolocation != undefined)
-      csv += 'test,' + this.test.name + ',' + '0-' + this.test.thickness + ',' + this.test.thickness + ',' + this.test.score + ',' + pathFileBloc + ',' + this.test.date + ',' + this.test.comment + ',' + this.test.geolocation.latitude + ',' + this.test.geolocation.longitude + '\r\n';
+      csv += this.test.geolocation.latitude + ',' + this.test.geolocation.longitude + '\r\n';
     else
-      csv += 'test,' + this.test.name + ',' + '0-' + this.test.thickness + ',' + this.test.thickness + ',' + this.test.score + ',' + pathFileBloc + ',' + this.test.date + ',' + this.test.comment + ',' + '' + ',' + '' + '\r\n';
-    return csv;
+      csv += '' + ',' + '' + '\r\n';
+
+
+    for (let layer of this.test.layers) {
+      if (layer.picture != undefined) {
+        let pathFileLayer = layer.picture.split("/"); //split path 
+        csv += 'layer,' + layer.num + ',' + layer.minThickness + '-' + layer.maxThickness + ',' + layer.thickness + ',' + layer.score + ',' + pathFileLayer[1] + ',' + ',' + layer.comment + '\r\n';
+      } else {
+        csv += 'layer,' + layer.num + ',' + layer.minThickness + '-' + layer.maxThickness + ',' + layer.thickness + ',' + layer.score + ',' + 'no image,' + ',' + layer.comment + '\r\n';
+      }
+    }
+
+        return csv;
   }
 
   /**
    * send email if all picture are read 
    */
   sendEmail() {
-      let testJson: any = Object.assign({}, this.test); // copy object
+      let testJson: any = JSON.parse(JSON.stringify(this.test));; // copy object
 
       //delete field
       delete testJson.isCompleted;
       delete testJson.id;
       delete testJson.user.language;
+      delete testJson.isUploaded;
 
       let newJson = '{ "SpadeTest":' + JSON.stringify(testJson) + '}';//add spadetest to json
       this.attachements.push('base64:' + this.test.name + '.csv//' + btoa(this.strJSONToCSV(newJson)));

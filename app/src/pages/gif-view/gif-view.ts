@@ -51,17 +51,19 @@ export class GifViewPage {
   validationStep() {
     switch(this.currentTest.step) {
       case Steps.EXTRACTING_BLOCK:
+        this.currentTest.step = Steps.OPENING_BLOCK;
+        this.navCtrl.push(GifViewPage);
+        break;
+      case Steps.OPENING_BLOCK:
+      default:
         if (this.platform.is("core")) {
-          this.currentTest.step = Steps.OPENING_BLOCK;
-          this.navCtrl.push(GifViewPage);
+          this.currentTest.step = Steps.DEFINING_LAYERS;
+          this.navCtrl.push(DefiningLayerPage);
         } else {
           this.currentTest.step = Steps.PICTURE_EXTRACTED_BLOCK;
           this.navCtrl.push(CameraPage);
         }
-      break;
-      case Steps.OPENING_BLOCK:
-      this.currentTest.step = Steps.DEFINING_LAYERS;
-      this.navCtrl.push(DefiningLayerPage);
+        break;
     }
   }
 }

@@ -74,6 +74,7 @@ export class SettingsPage {
     } else {
       this.toasts.showToast(this.translate.get('SETTINGS_SAVE'));
       this.dataService.save("user", this.user);
+      this.navCtrl.pop();
     }
   }
 
@@ -83,10 +84,12 @@ export class SettingsPage {
   }
 
   onUserTypeChange(userTypeSelect : HTMLSelectElement) {
+    /*
     if (userTypeSelect.value === UserType.Ofag) {
       this.toasts.showToast(this.translate.get('FUNCTIONALITY_NOT_YET_AVAILABLE'));
       this.userType = UserType.Anonymous;
       userTypeSelect.value = UserType.Anonymous;
     }
+    */
   }
 }

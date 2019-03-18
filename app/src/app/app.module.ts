@@ -12,6 +12,7 @@ import { MyApp } from './app.component';
 
 // Ionic Native plugins
 import { Camera } from '@ionic-native/camera';
+import { Diagnostic } from '@ionic-native/diagnostic';
 import { EmailComposer } from '@ionic-native/email-composer';
 import { File } from '@ionic-native/file';
 import { FilePath } from '@ionic-native/file-path';
@@ -20,7 +21,10 @@ import { ScreenOrientation } from '@ionic-native/screen-orientation';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { Toast } from '@ionic-native/toast';
-import { BrowserTab } from '@ionic-native/browser-tab';
+import { InAppBrowser } from '@ionic-native/in-app-browser';
+import { BackgroundMode } from '@ionic-native/background-mode';
+import { Network } from '@ionic-native/network';
+import { LocationAccuracy } from '@ionic-native/location-accuracy'
 
 // Pages
 import { CameraPage } from '../pages/camera/camera';
@@ -41,11 +45,12 @@ import { StructuralQualityPage } from './../pages/structural-quality/structural-
 // Providers
 import { DataService } from '../providers/data-service';
 import { RulerService } from '../providers/ruler-service';
+import { UploadProvider } from '../providers/upload/upload';
 import { Toasts } from '../providers/toasts';
 import { Utils } from '../providers/utils';
 import { GalleryModal } from 'ionic-gallery-modal';
 import { ZoomableImage } from 'ionic-gallery-modal';
-
+import { GpsServiceProvider } from '../providers/gps-service/gps-service';
 
 // Component
 import { FooterComponent } from '../components/footer/footer';
@@ -129,13 +134,18 @@ export function createTranslateLoader(http: Http) {
     GalleryModal
   ],
   providers: [
-    BrowserTab,
+    InAppBrowser,
+    BackgroundMode,
     Camera,
     DataService,
+    Diagnostic,
     EmailComposer,
     File,
     FilePath,
     Geolocation,
+    Network,
+    GpsServiceProvider,
+    LocationAccuracy,
     RulerService,
     ScreenOrientation,
     SplashScreen,
@@ -143,7 +153,8 @@ export function createTranslateLoader(http: Http) {
     Toast,
     Toasts,
     Utils,
-    TranslateProvider
+    TranslateProvider,
+    UploadProvider
   ]
 })
 

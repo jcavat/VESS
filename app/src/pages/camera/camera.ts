@@ -5,16 +5,18 @@ import { Component } from '@angular/core';
 import { NavController, NavParams, AlertController, Platform } from 'ionic-angular';
 import { Camera } from '@ionic-native/camera';
 import { File } from '@ionic-native/file';
+import { BackgroundMode } from '@ionic-native/background-mode'
 
 // Pages
-import { GifViewPage } from '../gif-view/gif-view';
 import { Notation1Page } from '../notation-1/notation-1';
+import { DefiningLayerPage } from "../defining-layer/defining-layer";
 // Providers
 import { DataService } from './../../providers/data-service';
 import { Toasts } from './../../providers/toasts';
 import { TranslateProvider } from '../../providers/translate/translate'
 import { Utils } from './../../providers/utils';
 import { Geolocation } from '@ionic-native/geolocation';
+import { LocationAccuracy } from '@ionic-native/location-accuracy'
 
 declare var cordova;
 
@@ -54,9 +56,23 @@ export class CameraPage {
     public  utils: Utils,
     private toasts: Toasts,
     private translate: TranslateProvider,
-    private geolocation: Geolocation) {}
+    private geolocation: Geolocation,
+    private backgroundMode: BackgroundMode,
+    private locationAccuracy: LocationAccuracy) {}
 
     ionViewDidLoad() {
+
+      this.locationAccuracy.canRequest().then((canRequest: boolean) => {
+
+        if(canRequest) {
+          
+          this.locationAccuracy.request(this.locationAccuracy.REQUEST_PRIORITY_BALANCED_POWER_ACCURACY).then(
+            () => console.log('Request successful'),
+            error => console.log('Error requesting location permissions', error)
+          );
+        }
+      });
+
     this.currentTest = this.dataService.getCurrentTest();
     this.testStep = this.currentTest.step;
 
@@ -87,14 +103,23 @@ export class CameraPage {
       quality: 80,
       targetWidth: 1000,
       targetHeight: 1000,
+      encodingType: this.camera.EncodingType.JPEG,
       correctOrientation: true // Fix the 90° picture rotation on Android devices. Note that when using the front camera, pictures are usally vertically flipped.
     }
+
+    // While in camera mode, BackgroundMode will prevent the OS to kill the app
+    // MAY NOT WORK WITH iOS 12.2
+    // TODO It seems this doesn't happend with more recent version of cordova and camera plugins
+    this.backgroundMode.enable();
+
     this.camera.getPicture(options).then((imagePath) => {
       let currentName = imagePath.substr(imagePath.lastIndexOf('/') + 1);
       let correctPath = imagePath.substr(0, imagePath.lastIndexOf('/') + 1, imagePath.lastIndexOf('?'));
       this.copyFileToLocalDir(correctPath, currentName, this.dataService.getLocalDirectory() , Utils.getDatetimeFilename('.jpg'));
+      this.backgroundMode.disable();
     }, (error) => {
       this.toasts.showToast(this.translate.get('ERROR_CREATING_PICTURE'));
+      this.backgroundMode.disable();
     });
   }
 
@@ -152,14 +177,23 @@ export class CameraPage {
       this.dataService.saveParcels();
       switch (this.testStep) {
         case Steps.PICTURE_EXTRACTED_BLOCK:
-          this.currentTest.step = Steps.OPENING_BLOCK;
-          this.navCtrl.push(GifViewPage);
+          this.currentTest.step = Steps.DEFINING_LAYERS;
+          this.navCtrl.push(DefiningLayerPage);
           break;
         case Steps.PICTURE_LAYER:
           this.navCtrl.push(Notation1Page)
           break;
       }
     }
+  }
+
+  showAlert(Title, subTitle, buttons) {
+    let alert = this.alertCtrl.create({
+      title: Title,
+      subTitle: subTitle,
+      buttons: buttons
+    });
+    alert.present();
   }
 
   addTestComment() {
