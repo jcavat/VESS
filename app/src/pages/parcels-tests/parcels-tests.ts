@@ -123,7 +123,7 @@ export class ParcelsTestsPage {
             },
             {
               name: "ofag",
-              placeholder: this.translate.get("OFAG_ID"),
+              placeholder: this.translate.get("PARCEL_ID"),
               value: this.user.idOfag
             }
           ];
@@ -187,7 +187,7 @@ export class ParcelsTestsPage {
    * event : event that was fired.
    * action : the action to do with the item (add, edit or delete)
    * item : the selected item.
-   * itemType : the kind of item we edit (parcels, tests)
+   * itemType : thonverting circular structure to JSON kind of item we edit (parcels, tests)
    */
   // manageItem(event, action: string, item: any, itemType: number) {
   //   event.stopPropagation();
@@ -276,15 +276,16 @@ export class ParcelsTestsPage {
           let testId = selectedParcel.tests.length > 0
             ? selectedParcel.tests[selectedParcel.tests.length - 1].id + 1
             : 1;
+          let currentParcel = this.dataService.getCurrentParcel()
           let test = new Test({
             id: testId,
             name: this.translate.get("TEST") + " " + testId,
-            date: Utils.getCurrentDatetime("dd/MM/y"),
-            step: Steps.EXTRACTING_BLOCK
+            date: Utils.getCurrentDatetime("dd/MM/y - HH:mm"),
+            step: Steps.EXTRACTING_BLOCK,
+            parcel: {num: currentParcel.ofag, name: currentParcel.name },
+            isUploaded: false
           });
-          let parcelIndex = this.parcels.indexOf(
-            this.dataService.getCurrentParcel()
-          );
+          let parcelIndex = this.parcels.indexOf(currentParcel);
           this.parcels[parcelIndex].tests.push(test);
           this.dataService.setCurrentTest(test.id);
           this.dataService.saveParcels();

@@ -1,4 +1,5 @@
 import { Layer, Test, Steps } from './../../models/parcel';
+import { User, UserType } from '../../models/user';
 import { Component } from '@angular/core';
 import { NavController, NavParams, ModalController, Platform, AlertController } from 'ionic-angular';
 // Pages
@@ -11,6 +12,7 @@ import { RulerService } from '../../providers/ruler-service';
 import { Toasts } from '../../providers/toasts';
 import { TranslateProvider } from '../../providers/translate/translate'
 import { Utils } from './../../providers/utils';
+import { UploadProvider } from '../../providers/upload/upload';
 
 /**
  * Validation of the layer notation. User must check multiples criterias.
@@ -44,7 +46,8 @@ export class VerifNotationPage {
     private platform: Platform,
     public rulerService: RulerService,
     private toasts: Toasts,
-    private translate: TranslateProvider) { }
+    private translate: TranslateProvider,
+    private uploadProvider: UploadProvider) { }
 
   ionViewDidLoad() {
     this.currentLayer = this.dataService.getCurrentLayer();
@@ -231,8 +234,12 @@ export class VerifNotationPage {
       if(hasPositiveCrit && hasNegativeCrit) {
         this.showAlert(this.translate.get('VALIDATION'),
         this.translate.get('VALIDATION_ENOUGH_VALID_CRITERIA', { score: this.score }),
-        ['OK']);
-        this.goToNextLayerOrHome();
+        [
+          {
+            text:"OK",
+            handler: () => this.goToNextLayerOrHome()
+          }
+        ]);
       }
       else{
         let alertTitle = "";
@@ -255,8 +262,12 @@ export class VerifNotationPage {
       if (((cntChecked >= 2) && (cntCriteria == 3)) || ((cntChecked >= 3) && (cntCriteria == 4))) {//Notation ok
         this.showAlert(this.translate.get('VALIDATION'),
           this.translate.get('VALIDATION_ENOUGH_VALID_CRITERIA', { score: this.score }),
-          ['OK']);
-        this.goToNextLayerOrHome();
+          [
+            {
+              text:"OK",
+              handler: () => this.goToNextLayerOrHome()
+            }
+          ]);
       } else if (cntChecked == 0) {//Return to decision tree on wrong result
         this.showAlert(this.translate.get('NO_VALIDATED_CRITERIA'),
           this.translate.get('VALIDATION_NO_VALID_CRITERIA'),
@@ -328,15 +339,21 @@ export class VerifNotationPage {
 
     this.dataService.getUserInfo().then((value) => {
       if (value != null) {
-        this.currentTest.user = value;
+        // We copy the user info so they can't be changed later
+        this.currentTest.user = new User(value); 
+        this.currentTest.isCompleted = true;
+        this.currentTest.score = testScore;
         this.dataService.saveParcels();
+        //upload only available for Ofag users
+        if(this.currentTest.user.userType === UserType.Ofag)
+          this.uploadProvider.askUpload(this.currentTest);
+
+        //show resume
+        this.modalCtrl.create(ModalPicturePage, { type: "resume", resume: this.currentTest }).present();
       }
     });
-    this.currentTest.isCompleted = true;
-    this.currentTest.score = testScore;
-    this.dataService.saveParcels();
-    //show resume
-    this.modalCtrl.create(ModalPicturePage, { type: "resume", resume: this.currentTest }).present();
+    
+
     //go to the home view
     this.navCtrl.popToRoot();
   }
