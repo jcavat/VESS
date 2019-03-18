@@ -68,6 +68,8 @@ export class UploadProvider {
     if (!testJSON.comment) testJSON.comment = "";
     if (!testJSON.geolocation) testJSON.geolocation = {longitude: -1, latitude: -1};
     if (!testJSON.user.farmerID) testJSON.user.farmerID = test.user.idOfag ? test.user.idOfag : "";
+    // TODO Reformat this code as soon as possible
+    if (testJSON.user.userType === 'ofag') testJSON.user.userType = 'Terre Vivante';
 
     let promiseBlockEncoded : Promise<String> = undefined;
     if(testJSON.picture) {
