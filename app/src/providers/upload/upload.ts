@@ -63,7 +63,7 @@ export class UploadProvider {
       l => console.log()
     );
 
-    let testJSON : any = Object.assign({}, test);
+    let testJSON : any = JSON.parse(JSON.stringify(test));
 
     if (!testJSON.comment) testJSON.comment = "";
     if (!testJSON.geolocation) testJSON.geolocation = {longitude: -1, latitude: -1};
