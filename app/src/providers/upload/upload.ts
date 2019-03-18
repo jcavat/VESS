@@ -68,6 +68,8 @@ export class UploadProvider {
     if (!testJSON.comment) testJSON.comment = "";
     if (!testJSON.geolocation) testJSON.geolocation = {longitude: -1, latitude: -1};
     if (!testJSON.user.farmerID) testJSON.user.farmerID = test.user.idOfag ? test.user.idOfag : "";
+    // TODO Reformat this code as soon as possible
+    if (testJSON.user.userType === 'ofag') testJSON.user.userType = 'Terre Vivante';
 
     let promiseBlockEncoded : Promise<String> = undefined;
     if(testJSON.picture) {
@@ -141,12 +143,12 @@ export class UploadProvider {
       var ctx = c.getContext("2d");
       var img = new Image();
       img.onload = function() {
-        c.width = 1280;
-        c.height = 720;
+        c.width = img.width;
+        c.height = img.height;
 
         ctx.drawImage(img, 0, 0);
 
-        var dataUri = c.toDataURL("image/jpg");
+        var dataUri = c.toDataURL("image/jpeg");
         
         resolve(dataUri);
       };

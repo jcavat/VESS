@@ -103,6 +103,7 @@ export class CameraPage {
       quality: 80,
       targetWidth: 1000,
       targetHeight: 1000,
+      encodingType: this.camera.EncodingType.JPEG,
       correctOrientation: true // Fix the 90° picture rotation on Android devices. Note that when using the front camera, pictures are usally vertically flipped.
     }
 

@@ -62,7 +62,7 @@ export class ExportPage {
 
   strJSONToCSV(string) {
     var csv = ',first name,last name,user type,mail,farmerID\r\n';
-    csv += 'userInfo,' + this.test.user.firstName + ',' + this.test.user.lastName + ',' + this.test.user.userType + ',' + this.test.user.mail + ',' + ( this.test.user.idOfag  ? this.test.user.idOfag : "-");
+    csv += 'userInfo,' + this.test.user.firstName + ',' + this.test.user.lastName + ',' + (this.test.user.userType === 'ofag' ? 'Terre Vivante' : this.test.user.userType) + ',' + this.test.user.mail + ',' + ( this.test.user.idOfag  ? this.test.user.idOfag : "-");
 
     csv += '\r\n\r\n';
     csv += 'parcel name,parcel ID\r\n';
