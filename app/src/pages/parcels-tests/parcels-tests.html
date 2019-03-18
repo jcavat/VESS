@@ -14,7 +14,7 @@
     <ion-item *ngFor="let item of listItems" (tap)=itemClicked(item)>
 
       {{item.name}} <span *ngIf="item.date"> - {{item.date}} </span>
-      <span *ngIf="item.ofag">(OFAG : {{item.ofag}})</span>
+      <span *ngIf="item.ofag">(Identifiant : {{item.ofag}})</span>
 
       <span *ngIf="item.score"> - {{ 'SCORE' | translate }} : 
         <strong [ngClass]="{'good' : item.score < 3, 'average' : item.score == 3, 'bad' : item.score > 3}"> {{item.score}} </strong>
