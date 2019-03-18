@@ -4,6 +4,7 @@ import { Platform }  from 'ionic-angular';
 import { Diagnostic } from '@ionic-native/diagnostic';
 import { AlertController } from 'ionic-angular';
 import { platformBrowser } from '@angular/platform-browser';
+import { TranslateProvider } from '../translate/translate'
 
 
 
@@ -19,7 +20,8 @@ export class GpsServiceProvider {
   constructor(
     private alertCtrl: AlertController,
     private platform: Platform,
-    private diagnostic: Diagnostic
+    private diagnostic: Diagnostic,
+    private translate: TranslateProvider
     ) {}
 
   public askGPSPermission(){
@@ -39,32 +41,33 @@ export class GpsServiceProvider {
                   // If permission was not given, inform the user
                   case permissionStatus.DENIED:
                     console.log("Authorization denied");
-                    this.showAlert("Avertissement", 
-                    "Cette application a besoin de la localisation afin de fonctionner normalement.\n\
-                    Appuyer sur \"Recommencer\" pour redemander les droits de localisation.",
+                    this.showAlert(this.translate.get("WARNING"), 
+                    this.translate.get("LOCATION_PERMISSION_DENIED"),
                       [
                         {
-                          text: "Recommencer",
+                          text: this.translate.get("TRY_AGAIN"),
                           handler: () => {
                             this.askGPSPermission();
                           }
                         },
                         {
-                          text: "Annuler",
-                          handler: () => {}
+                          text: this.translate.get("CANCEL"),
+                          role: "cancel"
                         }
                       ]
                     );
                     break;
                   
                   case permissionStatus.DENIED_ALWAYS:
-                  this.showAlert("Avertissement", 
-                  "L'application n'a pas les droits nécessaires pour accèder aux services de localisation.\n\
-                  Veuillez autoriser l'accès à la localisation dans les paramètres de l'appareil.",
+                  this.showAlert(this.translate.get("WARNING"), 
+                  this.translate.get("LOCATION_PERMISSION_DENIED_ALWAYS"),
                     [
-                      "Annuler",
                       {
-                        text: "Ouvrir paramètres",
+                        text: this.translate.get("CANCEL"),
+                        role: "cancel"
+                      },
+                      {
+                        text: this.translate.get("SETTINGS_OPEN"),
                         handler: () => {
                           this.diagnostic.switchToSettings();
                         }
@@ -78,13 +81,15 @@ export class GpsServiceProvider {
               }
             );
           case permissionStatus.DENIED_ALWAYS:
-            this.showAlert("Avertissement", 
-            "L'application n'a pas les droits nécessaires pour accèder aux services de localisation.\n\
-            Veuillez autoriser l'accès à la localisation dans les paramètres de l'appareil.",
+            this.showAlert(this.translate.get("WARNING"), 
+            this.translate.get("LOCATION_PERMISSION_DENIED_ALWAYS"),
               [
-                "Annuler",
                 {
-                  text: "Ouvrir paramètres",
+                  text: this.translate.get("CANCEL"),
+                  role: "cancel"
+                },
+                {
+                  text: this.translate.get("SETTINGS_OPEN"),
                   handler: () => {
                     this.diagnostic.switchToSettings();
                   }
