@@ -5,7 +5,6 @@ import { Component } from '@angular/core';
 import { NavController, NavParams, AlertController, Platform } from 'ionic-angular';
 import { Camera } from '@ionic-native/camera';
 import { File } from '@ionic-native/file';
-import { BackgroundMode } from '@ionic-native/background-mode'
 
 // Pages
 import { Notation1Page } from '../notation-1/notation-1';
@@ -57,7 +56,6 @@ export class CameraPage {
     private toasts: Toasts,
     private translate: TranslateProvider,
     private geolocation: Geolocation,
-    private backgroundMode: BackgroundMode,
     private locationAccuracy: LocationAccuracy) {}
 
     ionViewDidLoad() {
@@ -106,20 +104,12 @@ export class CameraPage {
       encodingType: this.camera.EncodingType.JPEG,
       correctOrientation: true // Fix the 90° picture rotation on Android devices. Note that when using the front camera, pictures are usally vertically flipped.
     }
-
-    // While in camera mode, BackgroundMode will prevent the OS to kill the app
-    // MAY NOT WORK WITH iOS 12.2
-    // TODO It seems this doesn't happend with more recent version of cordova and camera plugins
-    this.backgroundMode.enable();
-
     this.camera.getPicture(options).then((imagePath) => {
       let currentName = imagePath.substr(imagePath.lastIndexOf('/') + 1);
       let correctPath = imagePath.substr(0, imagePath.lastIndexOf('/') + 1, imagePath.lastIndexOf('?'));
       this.copyFileToLocalDir(correctPath, currentName, this.dataService.getLocalDirectory() , Utils.getDatetimeFilename('.jpg'));
-      this.backgroundMode.disable();
     }, (error) => {
       this.toasts.showToast(this.translate.get('ERROR_CREATING_PICTURE'));
-      this.backgroundMode.disable();
     });
   }
 
