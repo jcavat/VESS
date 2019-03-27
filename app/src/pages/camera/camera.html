@@ -11,12 +11,14 @@
 
 <ion-content padding>
   <p> {{instructions}} </p>
-  <img src={{lastImage}} (click)="takePicture()">
+  <div id="divCamera">
+    <img src={{lastImage}} (click)="takePicture()">
 
-  <button ion-button block color="brown" item-center (click)="takePicture()">
-      <ion-icon name="camera"></ion-icon>
-      <p>{{ 'TAKE_PICTURE' | translate }}</p>
+    <button ion-button block color="brown" item-center (click)="takePicture()">
+        <ion-icon name="camera"></ion-icon>
+        <p>{{ 'TAKE_PICTURE' | translate }}</p>
     </button>
+  </div>
 
 </ion-content>
 

@@ -22,7 +22,6 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { Toast } from '@ionic-native/toast';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
-import { BackgroundMode } from '@ionic-native/background-mode';
 import { Network } from '@ionic-native/network';
 import { LocationAccuracy } from '@ionic-native/location-accuracy'
 
@@ -135,7 +134,6 @@ export function createTranslateLoader(http: Http) {
   ],
   providers: [
     InAppBrowser,
-    BackgroundMode,
     Camera,
     DataService,
     Diagnostic,

@@ -1,6 +1,6 @@
 {
   "APP_DESCRIPTION": "This application allows to perform a VESS test. VESS: Visual Evaluation of Soil Structure (Ball et al. 2007, Guimaraes et al. 2011)",
-  "APP_TITLE": "VESS (Beta)",
+  "APP_TITLE": "VESS",
   "ABOUT": {
     "TITLE": "About",
     "DEVELOPERS": "Developers",
@@ -48,6 +48,7 @@
   "ERROR_SAVING_PICTURE": "Error while saving the picture.",
   "ERROR_SIZE_OF_LAYERS": "The total size of layers doesn't match the block thickness.",
   "EXPORT": "Export",
+  "FARMER_ID" : "Farmer No.",
   "FINAL_SCORE": "Final score : {{score}}",
   "FINAL_SCORE_OF_TEST": "Final score of test",
   "FUNCTIONALITY_NOT_YET_AVAILABLE": "Functionality not yet available.",
@@ -63,9 +64,9 @@
       }
     },
     "VERIFICATION": {
-      "SCORE1": "Tick the proposal(s) closest to what you are observing. Observe, manipulate, open the aggregates* of diameter equal to about 1cm.",
-      "SCORE2": "Tick the proposal(s) closest to your observation. For this observe, manipulate, open the aggregates* of diameter approximately equal to 1.5 cm.",
-      "SCORE4": "Tick the proposal(s) closest to your observation. To do this observe, manipulate and open the fragments* of soil coming from closed clods of diameter approximately equal to 1.5 cm."
+      "SCORE1": "Tick the proposal(s) closest to what you are observing. Observe, manipulate and open the aggregates*.",
+      "SCORE2": "Tick the proposal(s) closest to your observation. For this observe, manipulate and open the aggregates*.",
+      "SCORE4": "Tick the proposal(s) closest to your observation. To do this observe, manipulate and open the fragments* of soil coming from closed clods."
     }
   },
   "HOME": "Home",
@@ -233,24 +234,24 @@
   "VALIDATION_NO_NEGATIVE_CRITERIA": "Only positive criterias were checked. A score of 3 can't be confirmed. Please redo the notation.",
   "VALIDATION_NO_VALID_CRITERIA": "No validated criteria. Please redo the notation.",
   "VALIDATION_NOT_ENOUGH_CRITERIA": "There are not enough checked criteria. Please redo the notation.",
-  "VERIF_SCORE1_CRITERIA1_TITLE": "The aggregates of about 1.5 cm :",
+  "VERIF_SCORE1_CRITERIA1_TITLE": "The aggregates :",
   "VERIF_SCORE1_CRITERIA1_CHECK1": "Are very porous, lumpy",
   "VERIF_SCORE1_CRITERIA1_CHECK2": "Separate spontaneously or after a very low pressure",
   "VERIF_SCORE1_CRITERIA1_CHECK3": "Are held together by many roots",
-  "VERIF_SCORE2_CRITERIA1_TITLE": "The aggregates of about 1.5 cm :",
+  "VERIF_SCORE2_CRITERIA1_TITLE": "The aggregates :",
   "VERIF_SCORE2_CRITERIA1_CHECK1": "Are porous and lumpy",
   "VERIF_SCORE2_CRITERIA1_CHECK2": "Separate spontaneously or after a very low pressure",
   "VERIF_SCORE2_CRITERIA1_CHECK3": "Contain roots",
-  "VERIF_SCORE3_CRITERIA1_TITLE": "The soil fragments of about 1.5 cm :",
+  "VERIF_SCORE3_CRITERIA1_TITLE": "The soil fragments :",
   "VERIF_SCORE3_CRITERIA1_CHECK1": "Are mostly porous and rounded",
   "VERIF_SCORE3_CRITERIA1_CHECK2": "Are relatively easy to break",
   "VERIF_SCORE3_CRITERIA1_CHECK3": "Contain roots",
   "VERIF_SCORE3_CRITERIA2_TITLE": "Possibility of non-porous aggregates*, containing little or no roots",
-  "VERIF_SCORE4_CRITERIA1_TITLE": "The soil fragments of about 1.5 cm :",
+  "VERIF_SCORE4_CRITERIA1_TITLE": "The soil fragments :",
   "VERIF_SCORE4_CRITERIA1_CHECK1": "Are non-porous, cubic, with angular edges",
   "VERIF_SCORE4_CRITERIA1_CHECK2": "Contain very few roots",
   "VERIF_SCORE4_CRITERIA2_TITLE": "The roots are mostly around the clods or within visible coarse pores",
-  "VERIF_SCORE5_CRITERIA1_TITLE": "The aggregates or soil fragments of about 1.5 cm :",
+  "VERIF_SCORE5_CRITERIA1_TITLE": "The aggregates or soil fragments :",
   "VERIF_SCORE5_CRITERIA1_CHECK1": "Are difficult to obtain (compact soil)",
   "VERIF_SCORE5_CRITERIA1_CHECK2": "Contain very little or no roots",
   "VERIF_SCORE5_CRITERIA2_TITLE": "The roots are mostly around the clods or within visible coarse pores",

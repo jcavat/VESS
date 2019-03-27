@@ -56,7 +56,7 @@ export class UploadProvider {
     
     const loading : Loading = this.loadingController.create({
       content: this.translate.get("UPLOAD_IN_PROGRESS"),
-      duration: 10000
+      duration: 30000
     });
 
     loading.present().then(

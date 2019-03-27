@@ -1,9 +1,13 @@
 page-camera {
   ion-content img {
-  height: 70%;
+  height: 90%;
   width: auto;
   margin-left: auto;
   margin-right: auto;
   display: block;
+  }
+
+  #divCamera {
+    height: 75%;
   }
 }

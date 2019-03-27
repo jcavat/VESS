@@ -105,7 +105,6 @@
     <allow-navigation href="http://172.20.0.68:8101" />
     <allow-navigation href="http://169.254.57.52:8101" />
     <allow-navigation href="http://192.168.1.139:8100" />
-    <plugin name="cordova-plugin-background-mode" spec="https://github.com/tushe/cordova-plugin-background-mode.git" />
     <plugin name="cordova-plugin-network-information" spec="2.0.1" />
     <plugin name="cordova.plugins.diagnostic" spec="4.0.11" />
     <plugin name="cordova-plugin-request-location-accuracy" spec="2.2.3" />

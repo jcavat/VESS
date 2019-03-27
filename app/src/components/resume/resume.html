@@ -26,7 +26,7 @@
       <span *ngIf="resume.user"> 
         <ion-label stacked color="brown">{{ 'USER_NAME' | translate }} :</ion-label>
         {{resume.user.lastName}} {{resume.user.firstName}}
-        <ion-label *ngIf="resume.user.userType=='ofag'" stacked color="brown">{{ 'AGATE_NUMBER' | translate }} :</ion-label>
+        <ion-label *ngIf="resume.user.userType=='ofag'" stacked color="brown">{{ 'FARMER_ID' | translate }} :</ion-label>
         <span *ngIf="resume.user.userType=='ofag'">
         {{resume.user.idOfag}}
         </span>

@@ -1,6 +1,6 @@
 {
   "APP_DESCRIPTION": "Cette application permet d'effectuer l'évaluation visuelle de la structure du sol (VESS). VESS : Evaluation Visuelle de la Structure du Sol (Ball et al. 2007, Guimaraes et al. 2011)",
-  "APP_TITLE": "VESS (Beta)",
+  "APP_TITLE": "VESS",
   "ABOUT": {
     "TITLE": "À propos",
     "DEVELOPERS": "Développeurs",
@@ -48,6 +48,7 @@
   "ERROR_SAVING_PICTURE": "Erreur lors de l'enregistrement de l'image.",
   "ERROR_SIZE_OF_LAYERS": "La taille totale des couches ne correspond pas à l'épaisseur du bloc.",
   "EXPORT": "Exporter",
+  "FARMER_ID" : "N° d'agriculteur",
   "FINAL_SCORE": "Score final : {{score}}",
   "FINAL_SCORE_OF_TEST": "Score final du test :",
   "FUNCTIONALITY_NOT_YET_AVAILABLE": "Fonctionnalité pas encore disponible.",
@@ -63,9 +64,9 @@
       }
     },
     "VERIFICATION": {
-      "SCORE1": "Cochez la ou les proposition(s) qui se rapproche le plus de ce que vous observez. Observez, manipulez, ouvrez les agrégats* de diamètre égal à 1 cm environ.",
-      "SCORE2": "Cochez la ou les proposition(s) qui se rapprochent le plus de votre observation. Pour cela observez, manipulez, ouvrez les agrégats* de diamètre environ égal à 1.5 cm.",
-      "SCORE4": "Cochez la ou les proposition(s) qui se rapprochent le plus de votre observation. Pour cela observez, manipulez et ouvrez les fragments* de sol issus de mottes fermées de diamètre environ égal à 1.5 cm."
+      "SCORE1": "Cochez la ou les proposition(s) qui se rapproche le plus de ce que vous observez. Observez, manipulez et ouvrez les agrégats*.",
+      "SCORE2": "Cochez la ou les proposition(s) qui se rapprochent le plus de votre observation. Pour cela observez, manipulez et ouvrez les agrégats*.",
+      "SCORE4": "Cochez la ou les proposition(s) qui se rapprochent le plus de votre observation. Pour cela observez, manipulez et ouvrez les fragments* de sol issus de mottes fermées."
     }
   },
   "HOME": "Accueil",
@@ -233,24 +234,24 @@
   "VALIDATION_NO_NEGATIVE_CRITERIA": "Vous n'avez coché que des critères positifs, cela ne permet pas de confirmer le score de 3. Recommencez la notation.",
   "VALIDATION_NO_VALID_CRITERIA": "Aucun critère validé. Veuillez refaire la notation.",
   "VALIDATION_NOT_ENOUGH_CRITERIA": "Il n'y a pas assez de critères validés. Recommencez la notation.",
-  "VERIF_SCORE1_CRITERIA1_TITLE": "Les agrégats d’environ 1.5 cm :",
+  "VERIF_SCORE1_CRITERIA1_TITLE": "Les agrégats :",
   "VERIF_SCORE1_CRITERIA1_CHECK1": "Sont très poreux, grumeleux",
   "VERIF_SCORE1_CRITERIA1_CHECK2": "Se séparent spontanément ou après une très faible pression",
   "VERIF_SCORE1_CRITERIA1_CHECK3": "Sont maintenus entre eux par de nombreuses racines",
-  "VERIF_SCORE2_CRITERIA1_TITLE": "Les agrégats d’environ 1.5 cm :",
+  "VERIF_SCORE2_CRITERIA1_TITLE": "Les agrégats :",
   "VERIF_SCORE2_CRITERIA1_CHECK1": "Sont poreux et arrondis",
   "VERIF_SCORE2_CRITERIA1_CHECK2": "Se séparent spontanément ou après une très faible pression",
   "VERIF_SCORE2_CRITERIA1_CHECK3": "Contiennent des racines",
-  "VERIF_SCORE3_CRITERIA1_TITLE": "Les fragments de sol d’environ 1.5 cm :",
+  "VERIF_SCORE3_CRITERIA1_TITLE": "Les fragments de sol :",
   "VERIF_SCORE3_CRITERIA1_CHECK1": "Sont majoritairement poreux et arrondis",
   "VERIF_SCORE3_CRITERIA1_CHECK2": "Sont Relativement facile à rompre",
   "VERIF_SCORE3_CRITERIA1_CHECK3": "Contiennent des racines",
   "VERIF_SCORE3_CRITERIA2_TITLE": "Présence possible d'agrégats* non poreux, ne contenant pas ou peu de racines",
-  "VERIF_SCORE4_CRITERIA1_TITLE": "Les fragments de sol d’environ 1.5 cm :",
+  "VERIF_SCORE4_CRITERIA1_TITLE": "Les fragments de sol :",
   "VERIF_SCORE4_CRITERIA1_CHECK1": "Sont non poreux, de forme cubique, aux bords anguleux",
   "VERIF_SCORE4_CRITERIA1_CHECK2": "Contiennent très peu de racines",
   "VERIF_SCORE4_CRITERIA2_TITLE": "Les racines se situent principalement autour des mottes ou au sein des pores grossiers visibles",
-  "VERIF_SCORE5_CRITERIA1_TITLE": "Les agrégats ou fragments de sol d’environ 1.5 cm :",
+  "VERIF_SCORE5_CRITERIA1_TITLE": "Les agrégats ou fragments de sol :",
   "VERIF_SCORE5_CRITERIA1_CHECK1": "Sont difficiles à obtenir (sol compact)",
   "VERIF_SCORE5_CRITERIA1_CHECK2": "Contiennent très peu ou pas de racines",
   "VERIF_SCORE5_CRITERIA2_TITLE": "Les racines se situent principalement autour des mottes ou au sein des pores grossiers visibles",
