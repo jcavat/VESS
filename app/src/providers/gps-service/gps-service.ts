@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 import { Platform }  from 'ionic-angular';
 import { Diagnostic } from '@ionic-native/diagnostic';
 import { AlertController } from 'ionic-angular';
-import { platformBrowser } from '@angular/platform-browser';
 import { TranslateProvider } from '../translate/translate'
 
 
