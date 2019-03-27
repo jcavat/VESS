@@ -111,7 +111,6 @@ export class DefiningLayerPage {
         this.currentTest.thickness = this.thickness;
         if (this.thickness >= 30) {
           this.currentTest.soilState = 'NORMAL_SOIL';
-          this.dataService.setCurrentLayer(0);
           this.saveAndGoToNextStep(SoilState.normal);
         } else {
           this.showRadioAlert();
@@ -171,7 +170,7 @@ export class DefiningLayerPage {
             break;
           case SoilState.dry:
             this.showAlert(this.translate.get('TOO_DRY_SOIL'), this.translate.get('PLEASE_EXTRACT_A_NEW_BLOCK'));
-            this.currentTest.soilState = 'TOO_DRY_SOIL';            
+            this.currentTest.soilState = 'TOO_DRY_SOIL';     
             this.saveAndGoToNextStep(SoilState.dry);
             break;
           case SoilState.hard:
@@ -192,15 +191,17 @@ export class DefiningLayerPage {
     * @param soilState: The soil state.
     */
   private saveAndGoToNextStep(soilState: SoilState) {
-    this.dataService.saveParcels();
 
     switch (soilState) {
-      case SoilState.dry:
-      this.currentTest.step = Steps.EXTRACTING_BLOCK;
-      this.navCtrl.push(GifViewPage);
+      case SoilState.dry:  
+        this.currentTest.picture = undefined;
+        this.currentTest.step = Steps.EXTRACTING_BLOCK;
+        this.navCtrl.push(GifViewPage);
         break;
         
       default: // Normal, hard or stony soil
+        this.dataService.setCurrentLayer(0);
+        this.dataService.saveParcels();
         if (this.platform.is('core')) {
           this.currentTest.step = Steps.NOTATION;
           this.navCtrl.push(Notation1Page);
