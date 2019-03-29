@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams, AlertController } from 'ionic-angular';
 import { User, UserType } from '../../models/user';
 import { Storage } from '@ionic/storage';
+import * as forge from "node-forge";
 
 // Providers
 import { DataService } from '../../providers/data-service';
@@ -20,6 +21,7 @@ export class SettingsPage {
   idOfag: string;
   user: User;
   language: string;
+  readonly HASH : string = "myhash";
 
 
   constructor(
@@ -84,12 +86,45 @@ export class SettingsPage {
   }
 
   onUserTypeChange(userTypeSelect : HTMLSelectElement) {
-    /*
-    if (userTypeSelect.value === UserType.Ofag) {
-      this.toasts.showToast(this.translate.get('FUNCTIONALITY_NOT_YET_AVAILABLE'));
-      this.userType = UserType.Anonymous;
-      userTypeSelect.value = UserType.Anonymous;
+    let alert = this.alertCtrl.create({
+      enableBackdropDismiss: false,
+      title: "Mot de passe",
+      inputs: [
+        {
+          name: "password",
+          value: "",
+          type: "password"
+        }
+      ],
+      buttons: [
+        {
+          text: 'OK',
+          role: 'confirm',
+          handler: (inputs) => {
+            if(this.checkPassword(inputs.password)){
+              this.dataService.save("isConnectedTV", true);
+              this.toasts.showToast("Connexion réussie");
+            }
+            else {
+              this.showAlert("Mot de passe incorrect", "");
+              this.userType = UserType.Anonymous;
+              userTypeSelect.value = UserType.Anonymous;
+            }
+          }
+        }
+      ]
+    });
+    //this.dataService.load("isConnectedTV")
+
+    if (userTypeSelect.value === UserType.Ofag ) {
+      alert.present();
     }
-    */
+    
+  }
+
+  checkPassword(challenge: string){
+    let hash_challenge = forge.md.sha256.create();
+    hash_challenge.update(challenge);
+    return hash_challenge.digest().toHex() === this.HASH;
   }
 }
