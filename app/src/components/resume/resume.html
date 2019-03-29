@@ -16,6 +16,16 @@
     </ion-col>
   </ion-row>
   <ion-row>
+    <ion-col col-6>
+      <ion-label stacked color="brown">{{ 'PARCEL' | translate }}</ion-label>
+        {{resume.parcel.name}}
+      </ion-col>
+    <ion-col col-6>
+      <ion-label stacked color="brown">{{ 'PARCEL_ID' | translate }}</ion-label>
+        {{resume.parcel.num}}
+      </ion-col>
+  </ion-row>
+  <ion-row>
     <ion-col col-9>
       <ion-label stacked color="brown">{{ 'TEST_DATE' | translate }}</ion-label>
       {{resume.date}}
