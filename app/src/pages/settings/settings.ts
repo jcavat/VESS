@@ -7,6 +7,7 @@ import { Storage } from '@ionic/storage';
 import { DataService } from '../../providers/data-service';
 import { Toasts } from './../../providers/toasts';
 import { TranslateProvider } from '../../providers/translate/translate'
+import { ConnectionProvider } from '../../providers/connection/connection';
 
 @Component({
   selector: 'page-settings',
@@ -20,6 +21,7 @@ export class SettingsPage {
   idOfag: string;
   user: User;
   language: string;
+  readonly HASH : string = "myhash";
 
 
   constructor(
@@ -29,7 +31,8 @@ export class SettingsPage {
     public dataService: DataService,
     public alertCtrl: AlertController,
     private toasts: Toasts,
-    private translate: TranslateProvider) {
+    private translate: TranslateProvider,
+    private connectionProvider : ConnectionProvider) {
   }
 
   ionViewDidLoad() {
@@ -84,12 +87,39 @@ export class SettingsPage {
   }
 
   onUserTypeChange(userTypeSelect : HTMLSelectElement) {
-    /*
-    if (userTypeSelect.value === UserType.Ofag) {
-      this.toasts.showToast(this.translate.get('FUNCTIONALITY_NOT_YET_AVAILABLE'));
-      this.userType = UserType.Anonymous;
-      userTypeSelect.value = UserType.Anonymous;
+    let alertPassword = this.alertCtrl.create({
+      enableBackdropDismiss: false,
+      title: this.translate.get("PASSWORD"),
+      inputs: [
+        {
+          name: "password",
+          value: "",
+          type: "password"
+        }
+      ],
+      buttons: [
+        {
+          text: 'OK',
+          role: 'confirm',
+          handler: (inputs) => {
+            if(this.connectionProvider.checkPassword(userTypeSelect.value, inputs.password)){
+              this.toasts.showToast(this.translate.get("CONNECTION_SUCCESSFUL" ));
+            }
+            else {
+              this.showAlert(this.translate.get("PASSWORD_INCORRECT"), "");
+              this.userType = UserType.Anonymous;
+              userTypeSelect.value = UserType.Anonymous;
+            }
+          }
+        }
+      ]
+    });
+
+    if (userTypeSelect.value === UserType.Ofag ) {
+      if( !this.connectionProvider.isAuth(userTypeSelect.value))
+        alertPassword.present();
     }
-    */
+    
   }
+
 }
