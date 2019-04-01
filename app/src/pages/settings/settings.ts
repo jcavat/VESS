@@ -2,12 +2,12 @@ import { Component } from '@angular/core';
 import { NavController, NavParams, AlertController } from 'ionic-angular';
 import { User, UserType } from '../../models/user';
 import { Storage } from '@ionic/storage';
-import * as forge from "node-forge";
 
 // Providers
 import { DataService } from '../../providers/data-service';
 import { Toasts } from './../../providers/toasts';
 import { TranslateProvider } from '../../providers/translate/translate'
+import { ConnectionProvider } from '../../providers/connection/connection';
 
 @Component({
   selector: 'page-settings',
@@ -31,7 +31,8 @@ export class SettingsPage {
     public dataService: DataService,
     public alertCtrl: AlertController,
     private toasts: Toasts,
-    private translate: TranslateProvider) {
+    private translate: TranslateProvider,
+    private connectionProvider : ConnectionProvider) {
   }
 
   ionViewDidLoad() {
@@ -86,7 +87,7 @@ export class SettingsPage {
   }
 
   onUserTypeChange(userTypeSelect : HTMLSelectElement) {
-    let alert = this.alertCtrl.create({
+    let alertPassword = this.alertCtrl.create({
       enableBackdropDismiss: false,
       title: "Mot de passe",
       inputs: [
@@ -101,8 +102,7 @@ export class SettingsPage {
           text: 'OK',
           role: 'confirm',
           handler: (inputs) => {
-            if(this.checkPassword(inputs.password)){
-              this.dataService.save("isConnectedTV", true);
+            if(this.connectionProvider.checkPassword(userTypeSelect.value, inputs.password)){
               this.toasts.showToast("Connexion réussie");
             }
             else {
@@ -114,17 +114,12 @@ export class SettingsPage {
         }
       ]
     });
-    //this.dataService.load("isConnectedTV")
 
     if (userTypeSelect.value === UserType.Ofag ) {
-      alert.present();
+      if( !this.connectionProvider.isAuth(userTypeSelect.value))
+        alertPassword.present();
     }
     
   }
 
-  checkPassword(challenge: string){
-    let hash_challenge = forge.md.sha256.create();
-    hash_challenge.update(challenge);
-    return hash_challenge.digest().toHex() === this.HASH;
-  }
 }

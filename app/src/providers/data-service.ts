@@ -15,6 +15,7 @@ export class DataService {
   private currentTest: Test;
   private data: Parcel[] = [];
   private userData: User;
+  private access: { [userType: string] : string };
 
   constructor(private platform: Platform, public storage: Storage) { }
 
@@ -127,6 +128,10 @@ export class DataService {
     this.storage.set("parcels", JSON.stringify(this.data));
   }
 
+  public setAndSaveConnectionsInfo(accessList){
+    this.storage.set("access", JSON.stringify(accessList));
+  }
+
   /**
  * Get data from Storage.
  * @param key the key associated to the desired values.
@@ -141,6 +146,9 @@ export class DataService {
             break;
           case 'user':
             this.userData = JSON.parse(value);
+            break;
+          case 'access':
+            this.access = JSON.parse(value);
             break;
         }
       }
@@ -166,5 +174,15 @@ export class DataService {
       localDir = ""; // Default. Don't use a cordova location as it may not be available (e.g. if running on a regular browser)
     }
     return localDir;
+  }
+
+  public getAuthList() : Promise<any> {
+    return new Promise((resolve, err) => {
+      if(this.access){
+        resolve(this.access);
+      } else {
+        this.load("access").then( val => resolve(this.access));
+      }
+    });
   }
 }
