@@ -89,7 +89,7 @@ export class SettingsPage {
   onUserTypeChange(userTypeSelect : HTMLSelectElement) {
     let alertPassword = this.alertCtrl.create({
       enableBackdropDismiss: false,
-      title: "Mot de passe",
+      title: this.translate.get("PASSWORD"),
       inputs: [
         {
           name: "password",
@@ -103,10 +103,10 @@ export class SettingsPage {
           role: 'confirm',
           handler: (inputs) => {
             if(this.connectionProvider.checkPassword(userTypeSelect.value, inputs.password)){
-              this.toasts.showToast("Connexion réussie");
+              this.toasts.showToast(this.translate.get("CONNECTION_SUCCESSFUL" ));
             }
             else {
-              this.showAlert("Mot de passe incorrect", "");
+              this.showAlert(this.translate.get("PASSWORD_INCORRECT"), "");
               this.userType = UserType.Anonymous;
               userTypeSelect.value = UserType.Anonymous;
             }
