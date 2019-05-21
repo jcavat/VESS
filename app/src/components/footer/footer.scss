@@ -1,4 +1,11 @@
 //##footer button###
 .bottomButton{
   text-align : center !important;
+  white-space: nowrap;
+}
+@media screen and (max-width: 300px) {
+  .bottomButton .button-md{
+    font-size: 1.2rem;
+    padding: 1rem;
+  }
 }
