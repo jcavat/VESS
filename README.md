@@ -1,5 +1,7 @@
 <!-- markdownlint-disable MD033 -->
 
+Ce projet git n'est plus maintenu. Il se trouve maintenant sur githepia.
+
 # VESS
 
 This application allows to perform a Visual Evaluation of Soil Structure (VESS) test [Ball et al. 2007, Guimaraes et al. 2011].
