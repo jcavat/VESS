@@ -119,6 +119,7 @@ export class CameraPage {
       this.backgroundMode.disable();
     }, (error) => {
       this.toasts.showToast(this.translate.get('ERROR_CREATING_PICTURE'));
+      console.error("Error while taking picture: "+error)
       this.backgroundMode.disable();
     });
   }
